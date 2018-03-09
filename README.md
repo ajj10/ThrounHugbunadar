@@ -7,4 +7,4 @@ kalli
 
 sssaaaaaa
 
-thor is the master
+thor
