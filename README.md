@@ -19,4 +19,7 @@ LIME FEGIT
 ADAM
 SADAM
 FAGDAM
+
+I give up
+
 >>>>>>> branch 'master' of https://github.com/ajj10/ThrounHugbunadar.git
