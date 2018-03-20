@@ -22,7 +22,7 @@ FAGDAM
 
 I give up
 
-langar ad hengja mig
+langar ad hengja mig í dag
 
 
 >>>>>>> branch 'master' of https://github.com/ajj10/ThrounHugbunadar.git
