@@ -22,4 +22,7 @@ FAGDAM
 
 I give up
 
+langar ad hengja mig
+
+
 >>>>>>> branch 'master' of https://github.com/ajj10/ThrounHugbunadar.git
