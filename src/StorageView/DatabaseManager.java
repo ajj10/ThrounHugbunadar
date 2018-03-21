@@ -28,7 +28,6 @@ public class DatabaseManager
         System.out.println("Duration:" + rs.getString(7) + " minutes");
         System.out.println("");
         System.out.println("Mynd:" + rs.getString(9));
-        System.out.println("");
       }
     }
     catch(SQLException e)
