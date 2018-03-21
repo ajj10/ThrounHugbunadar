@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-#Þróun Hugbúnaðar
-##Höfundar: Adam, Ísak, Sölvi(in spirit) og Þór
+#ÃžrÃ³un HugbÃºnaÃ°ar
+##HÃ¶fundar: Adam, Ãsak, SÃ¶lvi(in spirit) og ÃžÃ³r
 ###woopwoop
->>>>>>> branch 'master' of https://github.com/ajj10/ThrounHugbunadar.git
