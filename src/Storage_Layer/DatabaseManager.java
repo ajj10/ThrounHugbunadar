@@ -1,4 +1,4 @@
-package StorageView;
+package Storage_Layer;
 
 import java.sql.*;
 
@@ -32,6 +32,7 @@ public class DatabaseManager
     }
     catch(SQLException e)
     {
+    	System.out.println("kalli!!");
       System.err.println(e.getMessage());
     }
     finally
@@ -44,6 +45,7 @@ public class DatabaseManager
       catch(SQLException e)
       {
         // connection close failed.
+    	  System.out.println("kalli!!");
         System.err.println(e);
       }
     }
