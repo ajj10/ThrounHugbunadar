@@ -1,10 +1,12 @@
 package View_Layer;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
+import Model_Layer.Daytrip;
 
 public class View {
+	
+	private Daytrip[] trips;
 
 	private JFrame frame;
 
