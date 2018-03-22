@@ -20,14 +20,14 @@ public class DatabaseManager
       {
         // read the result set
         System.out.println("Trip id: " + rs.getString(1));
-        System.out.println("Trip Name:" + rs.getString(2));
-        System.out.println("Departure Location:" + rs.getString(3)); 
-        System.out.println("Activity:" + rs.getString(4));
-        System.out.println("Price:" + rs.getString(5));
-        System.out.println("Rating::" + rs.getString(6));
-        System.out.println("Duration:" + rs.getString(7) + " minutes");
+        System.out.println("Trip Name: " + rs.getString(2));
+        System.out.println("Departure Location: " + rs.getString(3)); 
+        System.out.println("Activity: " + rs.getString(4));
+        System.out.println("Price: " + rs.getString(5));
+        System.out.println("Rating: " + rs.getString(6));
+        System.out.println("Duration: " + rs.getString(7) + " minutes");
         System.out.println("");
-        System.out.println("Mynd:" + rs.getString(9));
+        System.out.println("Mynd: " + rs.getString(9));
         System.out.println("");
       }
     }
