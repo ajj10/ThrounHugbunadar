@@ -30,11 +30,29 @@ public class TripSearch {
 	}
 	
 	public void sortByRating() {
-		//sort by rating
+		Daytrip temp;
+		for(int i = 0; i < trips.length-1; i++) {
+			for(int j = 1+i; j < trips.length; j++) {
+				if(trips[i].getAverageRating() < trips[j].getAverageRating()) {
+					temp = trips[i];
+					trips[i] = trips[j];
+					trips[j] = temp;
+				}
+			}
+		}
 	}
 	
 	public void sortByPrice() {
-		//sort by price
+		Daytrip temp;
+		for(int i = 0; i < trips.length-1; i++) {
+			for(int j = 1+i; j < trips.length; j++) {
+				if(trips[i].getPrice() > trips[j].getPrice()) {
+					temp = trips[i];
+					trips[i] = trips[j];
+					trips[j] = temp;
+				}
+			}
+		}
 	}
 	
 	public Daytrip[] search(String searchString) {
