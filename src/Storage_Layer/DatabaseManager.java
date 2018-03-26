@@ -4,19 +4,27 @@ import java.sql.*;
 
 public class DatabaseManager
 {
-  public static void main(String[] args) throws ClassNotFoundException
-  {
-    // load the sqlite-JDBC driver using the current class loader
-    Class.forName("org.sqlite.JDBC");
-    Connection connection = null;
-    
-    try
-    {
-      // create a database connectionS
-      connection = DriverManager.getConnection("jdbc:sqlite:database1.db");
-      Statement statement = connection.createStatement();
-      ResultSet rs = statement.executeQuery("SELECT * FROM AllTrips");
-      while(rs.next())
+  private static Connection connection;
+  
+  public static ResultSet getTrips(String location, String activity, int[] price, int rating, int duration) throws SQLException {
+	  Statement statement = connection.createStatement();
+	  String query = "SELECT * FROM AllTrips";
+	  query += " WHERE rating >= " + rating; //þarf að vera valið rating
+	  
+	  if(location != null) query += " AND location = '" + location + "'";
+	  if(activity != null) query += " AND activity = '" + activity + "'";
+	  if(price != null) query += " AND price >= " + price[0] + " AND price <= " + price[1];
+	  if(duration != -1) query += " AND duration <= " + duration;
+	  
+	  query += ";";
+	  System.out.println(query);
+	  //Breyta þannig það skili Daytrip
+	  ResultSet rs = statement.executeQuery(query);
+	  return rs;
+  }
+  
+  private static void printResults(ResultSet rs) throws SQLException {
+	  while(rs.next())
       {
         // read the result set
         System.out.println("Trip id: " + rs.getString(1));
@@ -30,6 +38,24 @@ public class DatabaseManager
         System.out.println("Mynd: " + rs.getString(9));
         System.out.println("");
       }
+  }
+  
+  public static void main(String[] args) throws ClassNotFoundException
+  {
+    // load the sqlite-JDBC driver using the current class loader
+    Class.forName("org.sqlite.JDBC");
+    connection = null;
+    
+    try
+    {
+      // create a database connectionS
+      connection = DriverManager.getConnection("jdbc:sqlite:database1.db");
+      Statement statement = connection.createStatement();
+      //ResultSet rs = statement.executeQuery("SELECT * FROM AllTrips");
+      int[] price = {0, 50000};
+      ResultSet rs = getTrips("Akureyri", "Mývatn", price, 3, 570);
+      //ResultSet rs = getTrips("Reykjavík", null, price, 0, -1);
+      printResults(rs);
     }
     catch(SQLException e)
     {
