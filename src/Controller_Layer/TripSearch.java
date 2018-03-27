@@ -91,6 +91,10 @@ public class TripSearch {
 		rating = Rating;
 	}
 	
+	public void setDuration(int Duration) {
+		duration = Duration;
+	}
+	
 	public ArrayList<Daytrip> getTrips() {
 		return trips;
 	}
