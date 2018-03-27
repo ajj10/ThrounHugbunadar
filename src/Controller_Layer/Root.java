@@ -28,21 +28,17 @@ public class Root {
 	}
 	
 	public ArrayList<Daytrip> search(String searchString) {
-		ArrayList<Daytrip> trips = null;
-		trips = myTripSearch.search(searchString);
-		return trips;
+		return myTripSearch.search(searchString);
 	}
 	
 	public ArrayList<Daytrip> findTrips(String location, String activity, int[] price, int rating, int duration) throws SQLException {
-		ArrayList<Daytrip> trips = null;
 		myTripSearch.setLocation(location);
 		myTripSearch.setActivity(activity);
 		myTripSearch.setPriceRange(price);
 		myTripSearch.setRating(rating);
 		myTripSearch.setDuration(duration);
 		myTripSearch.updateTrips();
-		trips = myTripSearch.getTrips();
-		return trips;
+		return myTripSearch.getTrips();
 	}
 
 }
