@@ -1,17 +1,19 @@
 package Model_Layer;
 
+import java.util.ArrayList;
+
 public class Basket {
 	
-	private Model_Layer.Daytrip[] trips;
-	private Model_Layer.Customer customerInfo;
+	private ArrayList<Daytrip> trips;
+	private Customer customerInfo;
 	
-	public Basket(Daytrip[] Trips, Customer customer) 
+	public Basket(ArrayList<Daytrip> Trips, Customer customer) 
 	{
 		trips = Trips;
 		customerInfo = customer;
 	}
 
-	public Daytrip[] getTrips() {
+	public ArrayList<Daytrip> getTrips() {
 		return trips;
 	}
 	
@@ -20,12 +22,11 @@ public class Basket {
 	}
 	
 	public void addTrip(Daytrip trip) {
-		int len = trips.length;
-		trips[len] = trip;
+		trips.add(trip);
 	}
 	
 	public void removeTrip(Daytrip trip) {
-		//remove
+		trips.remove(trip);
 	}
 	
 	public void emptyBasket() {
@@ -36,15 +37,15 @@ public class Basket {
 	public int getTotal() {
 		int totalPrice = 0;
 		
-		for (int i = 0; i < trips.length; i++) {
-			totalPrice += trips[i].getPrice();
+		for (int i = 0; i < trips.size(); i++) {
+			totalPrice += trips.get(i).getPrice();
 		}
 		
 		return totalPrice;
 	}
 	
 	public void bookTrips() {
-		//bóka
+		//bï¿½ka
 	}
 	
 	public void cancelBooking() {
