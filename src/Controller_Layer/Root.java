@@ -1,5 +1,7 @@
 package Controller_Layer;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 //import java.sql.Date;
 import java.util.Date;
 
@@ -25,13 +27,21 @@ public class Root {
 		//book
 	}
 	
-	public Daytrip[] search(String searchString) {
-		Daytrip[] trips = null;
+	public ArrayList<Daytrip> search(String searchString) {
+		ArrayList<Daytrip> trips = null;
+		trips = myTripSearch.search(searchString);
 		return trips;
 	}
 	
-	public Daytrip[] findTrips(String location, String activity, int[] price, int rating, int duartion) {
-		Daytrip[] trips = null;
+	public ArrayList<Daytrip> findTrips(String location, String activity, int[] price, int rating, int duration) throws SQLException {
+		ArrayList<Daytrip> trips = null;
+		myTripSearch.setLocation(location);
+		myTripSearch.setActivity(activity);
+		myTripSearch.setPriceRange(price);
+		myTripSearch.setRating(rating);
+		myTripSearch.setDuration(duration);
+		myTripSearch.updateTrips();
+		trips = myTripSearch.getTrips();
 		return trips;
 	}
 
