@@ -1,10 +1,14 @@
 package Controller_Layer;
 
 import Model_Layer.Daytrip;
+import Storage_Layer.DatabaseManager;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TripSearch {
 	
-	private Daytrip[] trips;
+	private ArrayList<Daytrip> trips;
 	//private DatabaseManager database;
 	private String location;
 	private String activity;
@@ -13,7 +17,7 @@ public class TripSearch {
 	private int duration;
 	
 	
-	public TripSearch(Daytrip[] Trips, String Location, String Activity, int highPrice, int lowPrice,
+	public TripSearch(ArrayList<Daytrip> Trips, String Location, String Activity, int highPrice, int lowPrice,
 			int Rating, int Duration) 
 	{
 		trips = Trips;
@@ -25,18 +29,19 @@ public class TripSearch {
 		duration = Duration;
 	}
 	
-	public void updateTrips() {
+	public void updateTrips() throws SQLException {
 		//update
+		trips = DatabaseManager.getTrips(location, activity, priceRange, rating, duration);
 	}
 	
 	public void sortByRating() {
 		Daytrip temp;
-		for(int i = 0; i < trips.length-1; i++) {
-			for(int j = 1+i; j < trips.length; j++) {
-				if(trips[i].getAverageRating() < trips[j].getAverageRating()) {
-					temp = trips[i];
-					trips[i] = trips[j];
-					trips[j] = temp;
+		for(int i = 0; i < trips.size()-1; i++) {
+			for(int j = 1+i; j < trips.size(); j++) {
+				if(trips.get(i).getAverageRating() < trips.get(j).getAverageRating()) {
+					temp = trips.get(i);
+					trips.set(i, trips.get(j));
+					trips.set(j, temp);
 				}
 			}
 		}
@@ -44,19 +49,28 @@ public class TripSearch {
 	
 	public void sortByPrice() {
 		Daytrip temp;
-		for(int i = 0; i < trips.length-1; i++) {
-			for(int j = 1+i; j < trips.length; j++) {
-				if(trips[i].getPrice() > trips[j].getPrice()) {
-					temp = trips[i];
-					trips[i] = trips[j];
-					trips[j] = temp;
+		for(int i = 0; i < trips.size()-1; i++) {
+			for(int j = 1+i; j < trips.size(); j++) {
+				if(trips.get(i).getPrice() > trips.get(j).getPrice()) {
+					temp = trips.get(i);
+					trips.set(i, trips.get(j));
+					trips.set(j, temp);
 				}
 			}
 		}
 	}
 	
-	public Daytrip[] search(String searchString) {
-		Daytrip[] searchStringTrips = null;
+	public ArrayList<Daytrip> search(String searchString) {
+		ArrayList<Daytrip> searchStringTrips = null;
+		
+		for(int i = 0; i < trips.size(); i++) {
+			if(trips.get(i).getName().toLowerCase().startsWith(searchString)) {
+				searchStringTrips.add(trips.get(i));
+			}
+			else if(trips.get(i).getLocation().toLowerCase().startsWith(searchString)) {
+				searchStringTrips.add(trips.get(i));
+			}
+		}
 		return searchStringTrips;
 	}
 	
@@ -77,7 +91,7 @@ public class TripSearch {
 		rating = Rating;
 	}
 	
-	public Daytrip[] getTrips() {
+	public ArrayList<Daytrip> getTrips() {
 		return trips;
 	}
 	
@@ -85,7 +99,6 @@ public class TripSearch {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
 }
