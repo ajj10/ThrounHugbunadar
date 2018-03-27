@@ -1,12 +1,14 @@
 package Storage_Layer;
 
 import java.sql.*;
+import Model_Layer.Daytrip;
+import java.util.ArrayList;
 
 public class DatabaseManager
 {
   private static Connection connection;
   
-  public static ResultSet getTrips(String location, String activity, int[] price, int rating, int duration) throws SQLException {
+  public static ArrayList<Daytrip> getTrips(String location, String activity, int[] price, int rating, int duration) throws SQLException {
 	  Statement statement = connection.createStatement();
 	  String query = "SELECT * FROM AllTrips";
 	  query += " WHERE rating >= " + rating; //þarf að vera valið rating
@@ -14,13 +16,37 @@ public class DatabaseManager
 	  if(location != null) query += " AND location = '" + location + "'";
 	  if(activity != null) query += " AND activity = '" + activity + "'";
 	  if(price != null) query += " AND price >= " + price[0] + " AND price <= " + price[1];
-	  if(duration != -1) query += " AND duration <= " + duration;
+	  if(duration > 0) query += " AND duration <= " + duration;
 	  
 	  query += ";";
 	  System.out.println(query);
-	  //Breyta þannig það skili Daytrip
+	  
 	  ResultSet rs = statement.executeQuery(query);
-	  return rs;
+	  ArrayList<Daytrip> trips = new ArrayList<Daytrip>();
+	  while(rs.next()) {
+		  trips.add(createDaytrip(rs));
+	  }
+	  return trips;
+  }
+  
+  private static Daytrip createDaytrip(ResultSet rs) throws SQLException {
+	  String tripName = rs.getString(2);
+	  String tripLocation = rs.getString(3);
+	  String tripActivity = rs.getString(4);
+	  
+	  int tripPrice = -1;
+	  if(rs.getString(5) != null) tripPrice = Integer.parseInt(rs.getString(5));
+	  int tripAverageRating = -1;
+	  if(rs.getString(6) != null) tripAverageRating = Integer.parseInt(rs.getString(6));
+	  int tripDuration = -1;
+	  if(rs.getString(7) != null) tripDuration = Integer.parseInt(rs.getString(7));
+	  
+	  String tripDescription = rs.getString(8);
+	  int tripSeatsAvailable = 10; //vantar í gagnagrunn
+	  //if(rs.getString(?) != null) tripSeatsAvailable = Integer.parseInt(rs.getString(?));
+	  
+	  Daytrip trips = new Daytrip(tripName, tripLocation, tripDuration, tripAverageRating, tripPrice, tripActivity, tripSeatsAvailable, tripDescription);
+      return trips;
   }
   
   private static void printResults(ResultSet rs) throws SQLException {
@@ -50,12 +76,9 @@ public class DatabaseManager
     {
       // create a database connectionS
       connection = DriverManager.getConnection("jdbc:sqlite:database1.db");
-      Statement statement = connection.createStatement();
+      //Statement statement = connection.createStatement();
       //ResultSet rs = statement.executeQuery("SELECT * FROM AllTrips");
-      int[] price = {0, 50000};
-      ResultSet rs = getTrips("Akureyri", "Mývatn", price, 3, 570);
-      //ResultSet rs = getTrips("Reykjavík", null, price, 0, -1);
-      printResults(rs);
+      //printResults(rs);
     }
     catch(SQLException e)
     {
