@@ -2,6 +2,7 @@ package Model_Layer;
 
 //import java.sql.Date;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Daytrip {
 	
@@ -13,10 +14,10 @@ public class Daytrip {
 	private String activity;
 	private int seatsAvailable;
 	private String description;
-	//private list<Review> review;
+	private ArrayList<Review> reviews;
 	
 	public Daytrip(String tripName, String tripLocation, int tripDuration, int tripAverageRating, 
-					int tripPrice, String tripActivity, int tripSeatsAvailable, String tripDescription)
+					int tripPrice, String tripActivity, int tripSeatsAvailable, String tripDescription, ArrayList<Review> tripReviews)
 	{
 		name = tripName;
 		location = tripLocation;
@@ -26,6 +27,7 @@ public class Daytrip {
 		activity = tripActivity;
 		seatsAvailable = tripSeatsAvailable;
 		description = tripDescription;
+		reviews = tripReviews;
 	}
 	
 	public String getName() {	
