@@ -2,7 +2,9 @@ package Storage_Layer;
 
 import java.sql.*;
 import Model_Layer.Daytrip;
+import Model_Layer.Review;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DatabaseManager
 {
@@ -30,6 +32,7 @@ public class DatabaseManager
   }
   
   private static Daytrip createDaytrip(ResultSet rs) throws SQLException {
+	  int tripNumber = Integer.parseInt(rs.getString(1));
 	  String tripName = rs.getString(2);
 	  String tripLocation = rs.getString(3);
 	  String tripActivity = rs.getString(4);
@@ -45,7 +48,17 @@ public class DatabaseManager
 	  int tripSeatsAvailable = 10; //vantar í gagnagrunn
 	  //if(rs.getString(?) != null) tripSeatsAvailable = Integer.parseInt(rs.getString(?));
 	  
-	  Daytrip trips = new Daytrip(tripName, tripLocation, tripDuration, tripAverageRating, tripPrice, tripActivity, tripSeatsAvailable, tripDescription);
+	  //Reviews
+	  Statement statement = connection.createStatement();
+	  String query = "SELECT * FROM Review WHERE tripNumber = " + tripNumber + ";";
+	  ResultSet reviews = statement.executeQuery(query);
+	  ArrayList<Review> reviewsArray = new ArrayList<Review>();
+	  while(reviews.next()) {
+		  //vantar reviewTitle og Date í database
+		  reviewsArray.add(new Review(reviews.getString(2), "reviewTitle", new Date(), reviews.getString(3), Integer.parseInt(reviews.getString(3))));
+	  }
+	  
+	  Daytrip trips = new Daytrip(tripName, tripLocation, tripDuration, tripAverageRating, tripPrice, tripActivity, tripSeatsAvailable, tripDescription, reviewsArray);
       return trips;
   }
   
