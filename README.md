@@ -1,3 +1,2 @@
-#ÃrÃ³un HugbÃºnaÃ°ar
-##HÃ¶fundar: Adam, Ãsak, SÃ¶lvi(in spirit) og ÃÃ³r
-###woopwoop
+##haxkall
+###Höfundar: Adam, Ísak(semi), Sölvi(hann reynir) og Şór(masterinn)
