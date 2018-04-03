@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Adam/Desktop/skóli/HÍ/4. ÖNN/Tölvugrafík/Forrit VS code/gamalt(c++)/sqlite-jdbc-3.18.0.jar" sourcepath="src/StorageView/sqlite-jdbc-3.18.0.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/C:/Users/Adam/git/ThrounHugbunadar/src/StorageView/"/>
@@ -12,5 +13,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
