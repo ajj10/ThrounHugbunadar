@@ -17,12 +17,13 @@ public class TripSearch {
 	private int duration;
 	
 	
-	public TripSearch(ArrayList<Daytrip> Trips, String Location, String Activity, int highPrice, int lowPrice,
+	public TripSearch(ArrayList<Daytrip> Trips, String Location, String Activity, int lowPrice, int highPrice,
 			int Rating, int Duration) 
 	{
 		trips = Trips;
 		location = Location;
 		activity = Activity;
+		priceRange = new int[2];
 		priceRange[0] = lowPrice;
 		priceRange[1] = highPrice;
 		rating = Rating;

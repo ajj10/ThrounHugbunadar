@@ -11,6 +11,7 @@ public class DatabaseManager
   private static Connection connection;
   
   public static ArrayList<Daytrip> getTrips(String location, String activity, int[] price, int rating, int duration) throws SQLException {
+	  connection = DriverManager.getConnection("jdbc:sqlite:database1.db");
 	  Statement statement = connection.createStatement();
 	  String query = "SELECT * FROM AllTrips";
 	  query += " WHERE rating >= " + rating; //þarf að vera valið rating
