@@ -3,13 +3,8 @@ package Controller_Layer1;
 import org.junit.*;
 
 import Controller_Layer.TripSearch;
-import Model_Layer.Daytrip;
 import junit.framework.TestCase;
-
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class TripSearchTest extends TestCase{
 	private TripSearch mySearch;
@@ -30,16 +25,22 @@ public class TripSearchTest extends TestCase{
 	}
 	
 	@Test
-	public void testloction() {
-		System.out.println(mySearch.getTrips().get(3).getName());
+	public void testname() {
 		assertEquals(mySearch.getTrips().get(3).getName(), "Glacier Adventure");
 	}
+	
 	@Test
 	public void testactivity() {
-		System.out.println(mySearch.getTrips().get(2).getActivity());
 		assertEquals(mySearch.getTrips().get(2).getActivity(), "Caving");
 	}
 	
-	
-	
+	@Test
+	public void testsortbyprice() {
+		mySearch1.sortByPrice();
+		assertEquals(mySearch1.getTrips().get(0).getPrice(), 11400);
+		assertEquals(mySearch1.getTrips().get(1).getPrice(), 14680);
+		assertEquals(mySearch1.getTrips().get(2).getPrice(), 27578);
+		assertEquals(mySearch1.getTrips().get(3).getPrice(), 29010);
+		assertEquals(mySearch1.getTrips().get(4).getPrice(), 35900);
+	}
 }
