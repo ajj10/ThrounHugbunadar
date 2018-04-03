@@ -1,6 +1,8 @@
-package Controller_Layer;
+package Controller_Layer1;
 
 import org.junit.*;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.*;
 
 public class TripSearchTest {
