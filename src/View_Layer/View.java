@@ -43,9 +43,11 @@ public class View {
 	
 	private JFrame frame;
 	private JTextField searchBoxTextField;
+	private JList tripDisplayList;
+	private DefaultListModel dm;
 	
 	public String searchString;
-	public String Location = "Reykjavík";
+	public String Location = "ReykjavÃ­k";
 	public int index;
 	
 	
@@ -85,6 +87,9 @@ public class View {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		tripDisplayList = new JList();
+		dm = new DefaultListModel();
+		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -120,13 +125,22 @@ public class View {
 					}
 				System.out.println(trips.get(0).getName());
 				//tripDisplayList.setModel(dm);
+				addLocation(Location);
+			}
+
+			private void addLocation(String location) {
+				dm.removeAllElements();
+				for(int i = 0; i<trips.size(); i++) {
+					dm.addElement(trips.get(i).getName());
+					tripDisplayList.setModel(dm);
+				}	
 			}
 		});
-		comboBoxLocation.addItem("Reykjavík");
+		comboBoxLocation.addItem("ReykjavÃ­k");
 		comboBoxLocation.addItem("Akureyri");
 		comboBoxLocation.addItem("Selfoss");
-		comboBoxLocation.addItem("Ísafjörður");
-		comboBoxLocation.addItem("Egilsstaðir");
+		comboBoxLocation.addItem("ÃsafjÃ¶rÃ°ur");
+		comboBoxLocation.addItem("EgilsstaÃ°ir");
 		//comboBoxLocation.setSelectedItem(null);
 		comboBoxLocation.setToolTipText("");
 		comboBoxLocation.setBounds(341, 58, 83, 22);
@@ -136,7 +150,9 @@ public class View {
 		scrollPane.setBounds(22, 42, 299, 167);
 		frame.getContentPane().add(scrollPane);
 		
-		JList tripDisplayList = new JList();
+		
+		scrollPane.setViewportView(tripDisplayList);
+		
 		tripDisplayList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -144,34 +160,10 @@ public class View {
 				String nafn = (String)tripDisplayList.getSelectedValue();
 				System.out.println(nafn);
 			}
+
 		});
-		scrollPane.setViewportView(tripDisplayList);
-		DefaultListModel dm = new DefaultListModel();
 		
 		
-		for(int i = 0; i<trips.size(); i++) {
-			dm.addElement(trips.get(i).getName());
-		}
-	
-		dm.addElement("palli");
-		dm.addElement("halli");
-		dm.addElement("salli");
-		dm.addElement("dalli");
-		dm.addElement("ralli");
-		dm.addElement("talli");
-		dm.addElement("lalli");
-		dm.addElement("jalli");
-		dm.addElement("galli");
-		dm.addElement("falli");
-		dm.addElement("salli");
-		dm.addElement("valli");
-		dm.addElement("balli");
-		dm.addElement("nalli");
-		dm.addElement("malli");
-		dm.addElement("zalli");
-		dm.addElement("walli");
-		
-		tripDisplayList.setModel(dm);
 		
 		
 	}
