@@ -37,17 +37,20 @@ import java.util.ArrayList;
 public class View {
 	
 	private ArrayList<Daytrip> trips;
-	private TripSearch tripsearch = new TripSearch(trips, "", "", 0, 10000000, -1, -1);
+	private TripSearch tripsearch;
 	private Basket basket;
-	private Root root = new Root(basket, tripsearch);
+	private Root root;
 	
 	private JFrame frame;
 	private JTextField searchBoxTextField;
 	private JList tripDisplayList;
 	private DefaultListModel dm;
+	private JComboBox comboBoxLocation;
+	private JComboBox comboBoxActivity;
 	
 	public String searchString;
 	public String Location = "Reykjavík";
+	public String Activity = "";
 	public int index;
 	
 	
@@ -81,6 +84,11 @@ public class View {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		trips = new ArrayList<Daytrip>();
+		tripsearch = new TripSearch(trips, "", "", 0, 10000000, -1, -1);
+		root = new Root(basket, tripsearch);
+		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.menu);
 		frame.setBounds(100, 100, 450, 300);
@@ -94,6 +102,8 @@ public class View {
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				searchString = searchBoxTextField.getText();
+				trips = root.search(searchString);
+				addToList();
 				System.out.println(searchString);
 				
 			}
@@ -108,43 +118,24 @@ public class View {
 		frame.getContentPane().add(searchBoxTextField);
 		searchBoxTextField.setColumns(10);
 		
-		JComboBox comboBoxLocation = new JComboBox();
-		comboBoxLocation.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Location = (String)comboBoxLocation.getSelectedItem();
-				System.out.println(Location);
-				int[] priceRange = new int[2];
-				priceRange[0] = 0;
-				priceRange[1] = 10000000;
-				
-					try {
-						trips = root.findTrips(Location, null, priceRange, -1, -1);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				System.out.println(trips.get(0).getName());
-				//tripDisplayList.setModel(dm);
-				addLocation(Location);
-			}
-
-			private void addLocation(String location) {
-				dm.removeAllElements();
-				for(int i = 0; i<trips.size(); i++) {
-					dm.addElement(trips.get(i).getName());
-					tripDisplayList.setModel(dm);
-				}	
-			}
-		});
-		comboBoxLocation.addItem("Reykjavík");
+		comboBoxLocation = new JComboBox();
+		comboBoxLocation.addItem(null);
 		comboBoxLocation.addItem("Akureyri");
-		comboBoxLocation.addItem("Selfoss");
+		comboBoxLocation.addItem("Heimaey");
 		comboBoxLocation.addItem("Ísafjörður");
-		comboBoxLocation.addItem("Egilsstaðir");
-		//comboBoxLocation.setSelectedItem(null);
+		comboBoxLocation.addItem("Reykjavík");
+		comboBoxLocation.addItem("Vatnajökull");
+
 		comboBoxLocation.setToolTipText("");
 		comboBoxLocation.setBounds(341, 58, 83, 22);
 		frame.getContentPane().add(comboBoxLocation);
+		
+		comboBoxLocation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				updateTrips();
+			}
+
+		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 42, 299, 167);
@@ -152,6 +143,20 @@ public class View {
 		
 		
 		scrollPane.setViewportView(tripDisplayList);
+		
+		comboBoxActivity = new JComboBox();
+		comboBoxActivity.addItem(null);
+		comboBoxActivity.addItem("Boat tours");
+		comboBoxActivity.addItem("Museums");
+		comboBoxActivity.addItem("Nature and parks");
+		comboBoxActivity.addItem("Outdoor activities");
+		comboBoxActivity.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateTrips();
+			}
+		});
+		comboBoxActivity.setBounds(341, 90, 83, 23);
+		frame.getContentPane().add(comboBoxActivity);
 		
 		tripDisplayList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -164,7 +169,28 @@ public class View {
 		});
 		
 		
+	}
+	private void updateTrips() {
+		Location = (String)comboBoxLocation.getSelectedItem();
+		Activity = (String)comboBoxActivity.getSelectedItem();
+		int[] priceRange = new int[2];
+		priceRange[0] = 0;
+		priceRange[1] = 10000000;
 		
-		
+			try {
+				trips = root.findTrips(Location, Activity, priceRange, -1, -1);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		addToList();
+	}
+	
+	private void addToList() {
+		dm.removeAllElements();
+		for(int i = 0; i<trips.size(); i++) {
+			dm.addElement(trips.get(i).getName());
+			tripDisplayList.setModel(dm);
+		}	
 	}
 }
