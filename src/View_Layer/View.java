@@ -227,6 +227,8 @@ public class View {
 		tripDisplayList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				int rowIndex = tripDisplayList.getSelectedRow();
+				System.out.println(trips.get(rowIndex).getName());
 				//index = tripDisplayList.getSelectedIndex();
 				//String nafn = (String)tripDisplayList.getSelectedValue();
 				//System.out.println(nafn);
