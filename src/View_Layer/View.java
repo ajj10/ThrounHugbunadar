@@ -104,7 +104,13 @@ public class View {
 		frame.getContentPane().setLayout(null);
 		
 		
-		tripDisplayList = new JTable(new DefaultTableModel(new Object[]{"Trip", "Price", "Duration", "Rating"},0));
+		tripDisplayList = new JTable(new DefaultTableModel(new Object[]{"Trip", "Price", "Duration", "Rating"},0){
+
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		       return false;
+		    }
+		});
 		dm = (DefaultTableModel) tripDisplayList.getModel();
 		
 		
@@ -224,6 +230,19 @@ public class View {
 				//index = tripDisplayList.getSelectedIndex();
 				//String nafn = (String)tripDisplayList.getSelectedValue();
 				//System.out.println(nafn);
+			}
+
+		});
+		
+		tripDisplayList.getTableHeader().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int col = tripDisplayList.columnAtPoint(e.getPoint());
+		        String name = tripDisplayList.getColumnName(col);
+		        if(name.equals("Price")) trips = root.sortByPrice();
+		        if(name.equals("Rating")) trips = root.sortByRating();
+		        addToList();
+		        
 			}
 
 		});
