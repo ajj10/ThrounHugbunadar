@@ -34,8 +34,10 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JSlider;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ChangeEvent;
 
 public class View {
@@ -47,8 +49,8 @@ public class View {
 	
 	private JFrame frame;
 	private JTextField searchBoxTextField;
-	private JList tripDisplayList;
-	private DefaultListModel dm;
+	private JTable tripDisplayList;
+	private DefaultTableModel dm;
 	private JComboBox comboBoxLocation;
 	private JComboBox comboBoxActivity;
 	private JSlider priceSlider;
@@ -101,8 +103,10 @@ public class View {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		tripDisplayList = new JList();
-		dm = new DefaultListModel();
+		
+		tripDisplayList = new JTable(new DefaultTableModel(new Object[]{"Trip", "Price", "Duration", "Rating"},0));
+		dm = (DefaultTableModel) tripDisplayList.getModel();
+		
 		
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(new ActionListener() {
@@ -212,14 +216,14 @@ public class View {
 		
 		
 		
-		//Listener fyrir search takka
+		//Listener fyrir töflu
 		//----------------------------------------------------------------
 		tripDisplayList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				index = tripDisplayList.getSelectedIndex();
-				String nafn = (String)tripDisplayList.getSelectedValue();
-				System.out.println(nafn);
+				//index = tripDisplayList.getSelectedIndex();
+				//String nafn = (String)tripDisplayList.getSelectedValue();
+				//System.out.println(nafn);
 			}
 
 		});
@@ -254,10 +258,10 @@ public class View {
 	//addtolist fall 
 	//------------------------------------------------
 	private void addToList() {
-		dm.removeAllElements();
+		dm.setNumRows(0);
 		for(int i = 0; i<trips.size(); i++) {
-			dm.addElement(trips.get(i).getName());
-			tripDisplayList.setModel(dm);
+			Daytrip trip = trips.get(i);
+			dm.addRow(new Object[]{trip.getName(), trip.getPrice() + " kr.", trip.getDuration() + " min", trip.getAverageRating()});
 		}	
 	}
 }
