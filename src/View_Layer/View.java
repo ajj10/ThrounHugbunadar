@@ -240,7 +240,8 @@ public class View {
 				int col = tripDisplayList.columnAtPoint(e.getPoint());
 		        String name = tripDisplayList.getColumnName(col);
 		        if(name.equals("Price")) trips = root.sortByPrice();
-		        if(name.equals("Rating")) trips = root.sortByRating();
+		        else if(name.equals("Rating")) trips = root.sortByRating();
+		        else if(name.equals("Duration")) trips = root.sortByDuration();
 		        addToList();
 		        
 			}

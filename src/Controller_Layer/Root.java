@@ -50,5 +50,10 @@ public class Root {
 		myTripSearch.sortByPrice();
 		return myTripSearch.getTrips();
 	}
+	
+	public ArrayList<Daytrip> sortByDuration() {
+		myTripSearch.sortByDuration();
+		return myTripSearch.getTrips();
+	}
 
 }
