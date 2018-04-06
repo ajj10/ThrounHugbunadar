@@ -110,6 +110,8 @@ public class View {
 		});
 		
 		
+		//Search Button
+		//------------------------------------------------
 		searchButton.setBounds(341, 11, 83, 23);
 		frame.getContentPane().add(searchButton);
 		
@@ -118,6 +120,9 @@ public class View {
 		frame.getContentPane().add(searchBoxTextField);
 		searchBoxTextField.setColumns(10);
 		
+		
+		//ComboboxLocation
+		//---------------------------------------------------------
 		comboBoxLocation = new JComboBox();
 		comboBoxLocation.addItem(null);
 		comboBoxLocation.addItem("Akureyri");
@@ -137,13 +142,19 @@ public class View {
 
 		});
 		
+		
+		
+		//Scrollpane
+		//------------------------------------------------------
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(22, 42, 299, 167);
 		frame.getContentPane().add(scrollPane);
 		
-		
 		scrollPane.setViewportView(tripDisplayList);
 		
+		
+		//comboBoxActivity
+		//-------------------------------------------------------
 		comboBoxActivity = new JComboBox();
 		comboBoxActivity.addItem(null);
 		comboBoxActivity.addItem("Boat tours");
@@ -158,6 +169,10 @@ public class View {
 		comboBoxActivity.setBounds(341, 90, 83, 23);
 		frame.getContentPane().add(comboBoxActivity);
 		
+		
+		
+		//Listener fyrir search takka
+		//----------------------------------------------------------------
 		tripDisplayList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -169,6 +184,9 @@ public class View {
 		});
 		
 		
+		
+	//update trips fall
+	//------------------------------------------------------------
 	}
 	private void updateTrips() {
 		Location = (String)comboBoxLocation.getSelectedItem();
@@ -186,6 +204,9 @@ public class View {
 		addToList();
 	}
 	
+	
+	//addtolist fall 
+	//------------------------------------------------
 	private void addToList() {
 		dm.removeAllElements();
 		for(int i = 0; i<trips.size(); i++) {

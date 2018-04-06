@@ -62,13 +62,13 @@ public class TripSearch {
 	}
 	
 	public ArrayList<Daytrip> search(String searchString) {
-		ArrayList<Daytrip> searchStringTrips = null;
+		ArrayList<Daytrip> searchStringTrips = new ArrayList<Daytrip>();
 		
 		for(int i = 0; i < trips.size(); i++) {
-			if(trips.get(i).getName().toLowerCase().startsWith(searchString)) {
+			if(trips.get(i).getName().toLowerCase().startsWith(searchString.toLowerCase())) {
 				searchStringTrips.add(trips.get(i));
 			}
-			else if(trips.get(i).getLocation().toLowerCase().startsWith(searchString)) {
+			else if(trips.get(i).getLocation().toLowerCase().startsWith(searchString.toLowerCase())) {
 				searchStringTrips.add(trips.get(i));
 			}
 		}
