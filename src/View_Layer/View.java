@@ -33,6 +33,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JSlider;
+import javax.swing.JLabel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class View {
 	
@@ -47,10 +51,12 @@ public class View {
 	private DefaultListModel dm;
 	private JComboBox comboBoxLocation;
 	private JComboBox comboBoxActivity;
+	private JSlider priceSlider;
 	
 	public String searchString;
 	public String Location = "Reykjavík";
 	public String Activity = "";
+	public int Price;
 	public int index;
 	
 	
@@ -125,7 +131,7 @@ public class View {
 		//ComboboxLocation
 		//---------------------------------------------------------
 		comboBoxLocation = new JComboBox();
-		comboBoxLocation.addItem(null);
+		comboBoxLocation.addItem("Location:");
 		comboBoxLocation.addItem("Akureyri");
 		comboBoxLocation.addItem("Heimaey");
 		comboBoxLocation.addItem("Ísafjörður");
@@ -159,7 +165,7 @@ public class View {
 		//-------------------------------------------------------
 		
 		comboBoxActivity = new JComboBox();
-		comboBoxActivity.addItem(null);
+		comboBoxActivity.addItem("Activity:");
 		comboBoxActivity.addItem("Boat tours");
 		comboBoxActivity.addItem("Museums");
 		comboBoxActivity.addItem("Nature and parks");
@@ -174,6 +180,35 @@ public class View {
 				searchBoxTextField.setText("");
 			}
 		});
+		
+		
+		
+		//Listener fyrir priceSlider
+		//--------------------------------------------------
+		priceSlider = new JSlider();
+		priceSlider.setMinimum(0);
+		priceSlider.setMaximum(50000);
+		priceSlider.setValue(50000);
+		
+		priceSlider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				updateTrips();
+			}
+		});
+		
+		priceSlider.setBounds(248, 220, 147, 26);
+		frame.getContentPane().add(priceSlider);
+		
+		JLabel lblKr = new JLabel("0 kr.");
+		lblKr.setBounds(248, 245, 44, 14);
+		frame.getContentPane().add(lblKr);
+		
+		JLabel lblKr_1 = new JLabel("50.000 kr.");
+		lblKr_1.setBounds(361, 245, 63, 14);
+		frame.getContentPane().add(lblKr_1);
+		
+		
 		
 		
 		
@@ -195,11 +230,16 @@ public class View {
 	//------------------------------------------------------------
 	}
 	private void updateTrips() {
+	
 		Location = (String)comboBoxLocation.getSelectedItem();
+		if(Location == "Location:") Location = null;
+		
 		Activity = (String)comboBoxActivity.getSelectedItem();
+		if(Activity == "Activity:") Activity = null;
+		
 		int[] priceRange = new int[2];
 		priceRange[0] = 0;
-		priceRange[1] = 10000000;
+		priceRange[1] = priceSlider.getValue();
 		
 			try {
 				trips = root.findTrips(Location, Activity, priceRange, -1, -1);
