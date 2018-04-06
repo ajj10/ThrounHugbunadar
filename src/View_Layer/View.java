@@ -105,6 +105,7 @@ public class View {
 				trips = root.search(searchString);
 				addToList();
 				System.out.println(searchString);
+				searchBoxTextField.setText("");
 				
 			}
 		});
@@ -138,6 +139,7 @@ public class View {
 		comboBoxLocation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				updateTrips();
+				searchBoxTextField.setText("");
 			}
 
 		});
@@ -155,19 +157,23 @@ public class View {
 		
 		//comboBoxActivity
 		//-------------------------------------------------------
+		
 		comboBoxActivity = new JComboBox();
 		comboBoxActivity.addItem(null);
 		comboBoxActivity.addItem("Boat tours");
 		comboBoxActivity.addItem("Museums");
 		comboBoxActivity.addItem("Nature and parks");
 		comboBoxActivity.addItem("Outdoor activities");
+		
+		comboBoxActivity.setBounds(341, 90, 83, 23);
+		frame.getContentPane().add(comboBoxActivity);
+		
 		comboBoxActivity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateTrips();
+				searchBoxTextField.setText("");
 			}
 		});
-		comboBoxActivity.setBounds(341, 90, 83, 23);
-		frame.getContentPane().add(comboBoxActivity);
 		
 		
 		
