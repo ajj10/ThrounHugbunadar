@@ -55,6 +55,8 @@ public class View {
 	private JComboBox comboBoxActivity;
 	private JSlider priceSlider;
 	
+	private View_Trip view_trip;
+	
 	public String searchString;
 	public String Location = "Reykjavík";
 	public String Activity = "";
@@ -96,6 +98,7 @@ public class View {
 		trips = new ArrayList<Daytrip>();
 		tripsearch = new TripSearch(trips, "", "", 0, 10000000, -1, -1);
 		root = new Root(basket, tripsearch);
+		
 		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.menu);
@@ -229,9 +232,8 @@ public class View {
 			public void mouseClicked(MouseEvent arg0) {
 				int rowIndex = tripDisplayList.getSelectedRow();
 				System.out.println(trips.get(rowIndex).getName());
-				//index = tripDisplayList.getSelectedIndex();
-				//String nafn = (String)tripDisplayList.getSelectedValue();
-				//System.out.println(nafn);
+				view_trip = new View_Trip(trips.get(rowIndex));
+				view_trip.setVisible(true);
 			}
 
 		});

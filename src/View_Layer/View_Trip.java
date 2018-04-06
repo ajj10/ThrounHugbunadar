@@ -2,16 +2,20 @@ package View_Layer;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller_Layer.TripSearch;
+import Model_Layer.Daytrip;
+import Model_Layer.Review;
 
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 
 public class View_Trip extends JFrame {
 
@@ -24,12 +28,12 @@ public class View_Trip extends JFrame {
 	private JTextField Price_Text;
 	private JTextField Rating_Text;
 	private JTextField Duration_Text;
-	
+	private Daytrip trip;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -40,13 +44,15 @@ public class View_Trip extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public View_Trip() {
-		setTitle("bla");
+	public View_Trip(Daytrip myTrip) {
+		trip = myTrip;
+		
+		setTitle(trip.getName());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,10 +64,16 @@ public class View_Trip extends JFrame {
 		photoPanel.setBounds(10, 11, 128, 92);
 		contentPane.add(photoPanel);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(148, 11, 262, 92);
+		contentPane.add(scrollPane);
+		
 		JTextArea descriptionText = new JTextArea();
+		scrollPane.setViewportView(descriptionText);
+		descriptionText.setWrapStyleWord(true);
+		descriptionText.setLineWrap(true);
 		descriptionText.setEditable(false);
-		descriptionText.setBounds(148, 11, 262, 92);
-		contentPane.add(descriptionText);
+		descriptionText.setText(trip.getDescription());
 		
 		JLabel lblNewLabel = new JLabel("Activity:");
 		lblNewLabel.setBounds(10, 131, 62, 14);
@@ -88,29 +100,34 @@ public class View_Trip extends JFrame {
 		Activity_Text.setBounds(84, 125, 130, 26);
 		contentPane.add(Activity_Text);
 		Activity_Text.setColumns(10);
+		Activity_Text.setText(trip.getActivity());
 		
 		Location_Text = new JTextField();
 		Location_Text.setEditable(false);
 		Location_Text.setColumns(10);
 		Location_Text.setBounds(84, 150, 130, 26);
 		contentPane.add(Location_Text);
+		Location_Text.setText(trip.getLocation());
 		
 		Price_Text = new JTextField();
 		Price_Text.setEditable(false);
 		Price_Text.setColumns(10);
 		Price_Text.setBounds(84, 175, 130, 26);
 		contentPane.add(Price_Text);
+		Price_Text.setText(trip.getPrice() + " kr.");
 		
 		Rating_Text = new JTextField();
 		Rating_Text.setEditable(false);
 		Rating_Text.setColumns(10);
 		Rating_Text.setBounds(84, 200, 130, 26);
 		contentPane.add(Rating_Text);
+		Rating_Text.setText(trip.getAverageRating() + "");
 		
 		Duration_Text = new JTextField();
 		Duration_Text.setEditable(false);
 		Duration_Text.setColumns(10);
 		Duration_Text.setBounds(84, 225, 130, 26);
 		contentPane.add(Duration_Text);
+		Duration_Text.setText(trip.getDuration() + " mín");
 	}
 }
