@@ -61,6 +61,19 @@ public class TripSearch {
 		}
 	}
 	
+	public void sortByDuration() {
+		Daytrip temp;
+		for(int i = 0; i < trips.size()-1; i++) {
+			for(int j = 1+i; j < trips.size(); j++) {
+				if(trips.get(i).getDuration() > trips.get(j).getDuration()) {
+					temp = trips.get(i);
+					trips.set(i, trips.get(j));
+					trips.set(j, temp);
+				}
+			}
+		}
+	}
+	
 	public ArrayList<Daytrip> search(String searchString) {
 		ArrayList<Daytrip> searchStringTrips = new ArrayList<Daytrip>();
 		
