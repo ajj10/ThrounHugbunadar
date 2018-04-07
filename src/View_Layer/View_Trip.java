@@ -1,9 +1,12 @@
 package View_Layer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import java.awt.Label;
 
 public class View_Trip extends JFrame {
 
@@ -59,10 +63,6 @@ public class View_Trip extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JPanel photoPanel = new JPanel();
-		photoPanel.setBounds(10, 11, 128, 92);
-		contentPane.add(photoPanel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(148, 11, 262, 92);
@@ -128,6 +128,17 @@ public class View_Trip extends JFrame {
 		Duration_Text.setColumns(10);
 		Duration_Text.setBounds(84, 225, 130, 26);
 		contentPane.add(Duration_Text);
-		Duration_Text.setText(trip.getDuration() + " mÃ­n");
+		Duration_Text.setText(trip.getDuration() + " mín");
+		
+		JLabel PhotoLabel = new JLabel("");
+		PhotoLabel.setBounds(10, 11, 130, 92);
+		contentPane.add(PhotoLabel);
+	
+		String path = "Images/" + trip.getName() + ".PNG";
+		ImageIcon myImage = new ImageIcon(path);
+		Image img = myImage.getImage();
+		Image newImg = img.getScaledInstance(PhotoLabel.getWidth(), PhotoLabel.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon image = new ImageIcon(newImg);
+		PhotoLabel.setIcon(image);
 	}
 }
