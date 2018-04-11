@@ -17,9 +17,11 @@ import Controller_Layer.TripSearch;
 import Model_Layer.Basket;
 import Model_Layer.Daytrip;
 import Model_Layer.Review;
+import View_Layer.View;
 
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import java.awt.Label;
@@ -31,8 +33,6 @@ import javax.swing.DropMode;
 public class View_Trip extends JFrame {
 
 	// breyting
-	private TripSearch tripsearch;
-	private Root root;
 	
 	private JPanel contentPane;
 	private JTextField Activity_Text;
@@ -43,6 +43,9 @@ public class View_Trip extends JFrame {
 	private Daytrip trip;
 	private JTextField numberOfSeats;
 	private JTextField tripDate;
+	
+	public String day;
+	public int seats;
 
 	/**
 	 * Launch the application.
@@ -168,12 +171,13 @@ public class View_Trip extends JFrame {
 		contentPane.add(numberOfSeats);
 		numberOfSeats.setColumns(10);
 		
-		
 		JButton btnNewButton = new JButton("Add to Basket");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//root.bookSeat(trip.getName(), , );
+				day = tripDate.getText();
+				seats = trip.getSeatsAvailable(day);
+				//addToBasket(trip, day, seats);
 				
 			}
 		});
@@ -189,7 +193,22 @@ public class View_Trip extends JFrame {
 		contentPane.add(tripDate);
 		tripDate.setColumns(10);
 		
+		
+		
 		JButton btnNewButton_1 = new JButton("Check availability");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				day = tripDate.getText();
+				seats = trip.getSeatsAvailable(day);
+				JOptionPane.showMessageDialog(contentPane,
+			            "Available seats for "
+			             + day + " are:  " + seats,
+			             "Seats",
+			            JOptionPane.INFORMATION_MESSAGE,
+			            null);
+			}
+		});
 		btnNewButton_1.setBounds(288, 152, 122, 23);
 		contentPane.add(btnNewButton_1);
 	}

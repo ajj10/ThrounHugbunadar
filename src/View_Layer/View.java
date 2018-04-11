@@ -301,4 +301,9 @@ public class View {
 			}
 		}	
 	}
+	
+	
+	public void addToBasket(Daytrip trip, String day, int seats) {
+		root.bookSeat(trip, day, seats);
+	}
 }

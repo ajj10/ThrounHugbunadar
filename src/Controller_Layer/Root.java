@@ -2,18 +2,17 @@ package Controller_Layer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-//import java.sql.Date;
-import java.util.Date;
+
 
 import Model_Layer.Basket;
 import Model_Layer.Daytrip;
 import Model_Layer.Review;
-//kalli
+
 public class Root {
 	
 	private Basket myBasket;
 	private TripSearch myTripSearch;
-	
+
 	public Root(Basket basket, TripSearch tripSearch) {
 		myBasket = basket;
 		myTripSearch = tripSearch;
@@ -23,8 +22,8 @@ public class Root {
 		//review
 	}
 	
-	public void bookSeat(String name, Date day, int numSeats) {
-		//book
+	public void bookSeat(Daytrip trip, String day, int numSeats) {
+		myBasket.addTrip(trip);
 	}
 	
 	public ArrayList<Daytrip> search(String searchString) {
