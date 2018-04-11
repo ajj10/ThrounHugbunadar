@@ -54,7 +54,7 @@ public class Daytrip {
 		return activity;
 	}
 	
-	public int getSeatsAvailable(Date day) {
+	public int getSeatsAvailable(String day) {
 		return seatsAvailable;
 	}
 	

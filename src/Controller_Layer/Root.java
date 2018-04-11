@@ -23,7 +23,7 @@ public class Root {
 		//review
 	}
 	
-	public void bookSeat(String name, Date day, int numSeats) {
+	public void bookSeat(String name, String day, int numSeats) {
 		//book
 	}
 	

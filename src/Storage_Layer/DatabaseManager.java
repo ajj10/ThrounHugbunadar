@@ -33,26 +33,29 @@ public class DatabaseManager
   }
   
   private static Daytrip createDaytrip(ResultSet rs) throws SQLException {
+	  
 	  int tripNumber = Integer.parseInt(rs.getString(1));
 	  String tripName = rs.getString(2);
 	  String tripLocation = rs.getString(3);
 	  String tripActivity = rs.getString(4);
-	  
 	  int tripPrice = -1;
 	  if(rs.getString(5) != null) tripPrice = Integer.parseInt(rs.getString(5));
 	  int tripAverageRating = -1;
 	  if(rs.getString(6) != null) tripAverageRating = Integer.parseInt(rs.getString(6));
 	  int tripDuration = -1;
 	  if(rs.getString(7) != null) tripDuration = Integer.parseInt(rs.getString(7));
-	  
 	  String tripDescription = rs.getString(8);
-	  int tripSeatsAvailable = 10; //vantar í gagnagrunn
-	  //if(rs.getString(?) != null) tripSeatsAvailable = Integer.parseInt(rs.getString(?));
+	  
+	  Statement statement = connection.createStatement();
+	  String query = "SELECT * FROM Bookings WHERE tripNumber = " + tripNumber + ";";
+	  ResultSet seats = statement.executeQuery(query);
+	  int tripSeatsAvailable = 7; //fast
+	  if(rs.getString(3) != null) tripSeatsAvailable = Integer.parseInt(rs.getString(3));
 	  
 	  //Reviews
-	  Statement statement = connection.createStatement();
-	  String query = "SELECT * FROM Review WHERE tripNumber = " + tripNumber + ";";
-	  ResultSet reviews = statement.executeQuery(query);
+	  Statement statement1 = connection.createStatement();
+	  String query1 = "SELECT * FROM Review WHERE tripNumber = " + tripNumber + ";";
+	  ResultSet reviews = statement1.executeQuery(query1);
 	  ArrayList<Review> reviewsArray = new ArrayList<Review>();
 	  while(reviews.next()) {
 		  //vantar reviewTitle og Date í database
