@@ -120,6 +120,7 @@ public class View {
 		tripDisplayList.getColumnModel().getColumn(1).setPreferredWidth(50);
 		tripDisplayList.getColumnModel().getColumn(2).setPreferredWidth(50);
 		tripDisplayList.getColumnModel().getColumn(3).setPreferredWidth(30);
+		tripDisplayList.getTableHeader().setResizingAllowed(false);
 		
 		dm = (DefaultTableModel) tripDisplayList.getModel();
 		

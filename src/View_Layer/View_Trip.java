@@ -5,13 +5,16 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller_Layer.Root;
 import Controller_Layer.TripSearch;
+import Model_Layer.Basket;
 import Model_Layer.Daytrip;
 import Model_Layer.Review;
 
@@ -20,11 +23,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import java.awt.Label;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class View_Trip extends JFrame {
 
 	// breyting
 	private TripSearch tripsearch;
+	private Root root;
 	
 	private JPanel contentPane;
 	private JTextField Activity_Text;
@@ -33,6 +40,8 @@ public class View_Trip extends JFrame {
 	private JTextField Rating_Text;
 	private JTextField Duration_Text;
 	private Daytrip trip;
+	private JTextField numberOfSeats;
+	private JTextField tripDate;
 
 	/**
 	 * Launch the application.
@@ -145,5 +154,39 @@ public class View_Trip extends JFrame {
 		Image newImg = img.getScaledInstance(PhotoLabel.getWidth(), PhotoLabel.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon image = new ImageIcon(newImg);
 		PhotoLabel.setIcon(image);
+		
+		JLabel lblNewLabel_5 = new JLabel("How many persons?");
+		lblNewLabel_5.setBounds(224, 178, 122, 20);
+		contentPane.add(lblNewLabel_5);
+		
+		numberOfSeats = new JTextField();
+		numberOfSeats.setBounds(356, 178, 54, 20);
+		contentPane.add(numberOfSeats);
+		numberOfSeats.setColumns(10);
+		
+		
+		JButton btnNewButton = new JButton("Add to Basket");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//root.bookSeat(trip.getName(), , );
+				
+			}
+		});
+		btnNewButton.setBounds(288, 202, 122, 23);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblDateddmmyy = new JLabel("Date (DD/MM/YY)");
+		lblDateddmmyy.setBounds(224, 131, 94, 14);
+		contentPane.add(lblDateddmmyy);
+		
+		tripDate = new JTextField();
+		tripDate.setBounds(324, 128, 86, 20);
+		contentPane.add(tripDate);
+		tripDate.setColumns(10);
+		
+		JButton btnNewButton_1 = new JButton("Check availability");
+		btnNewButton_1.setBounds(288, 152, 122, 23);
+		contentPane.add(btnNewButton_1);
 	}
 }
