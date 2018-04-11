@@ -114,6 +114,13 @@ public class View {
 		       return false;
 		    }
 		});
+		
+		tripDisplayList.getTableHeader().setReorderingAllowed(false);
+		tripDisplayList.getColumnModel().getColumn(0).setPreferredWidth(100);
+		tripDisplayList.getColumnModel().getColumn(1).setPreferredWidth(50);
+		tripDisplayList.getColumnModel().getColumn(2).setPreferredWidth(50);
+		tripDisplayList.getColumnModel().getColumn(3).setPreferredWidth(30);
+		
 		dm = (DefaultTableModel) tripDisplayList.getModel();
 		
 		
@@ -285,7 +292,12 @@ public class View {
 		dm.setNumRows(0);
 		for(int i = 0; i<trips.size(); i++) {
 			Daytrip trip = trips.get(i);
-			dm.addRow(new Object[]{trip.getName(), trip.getPrice() + " kr.", trip.getDuration() + " min", trip.getAverageRating()});
+			
+			if(trip.getDuration() == -1) {
+				dm.addRow(new Object[]{trip.getName(), trip.getPrice() + " kr.",  "??? min", trip.getAverageRating()});
+			}else {
+				dm.addRow(new Object[]{trip.getName(), trip.getPrice() + " kr.", trip.getDuration() + " min", trip.getAverageRating()});
+			}
 		}	
 	}
 }

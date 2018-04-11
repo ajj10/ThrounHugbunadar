@@ -128,7 +128,12 @@ public class View_Trip extends JFrame {
 		Duration_Text.setColumns(10);
 		Duration_Text.setBounds(84, 225, 130, 26);
 		contentPane.add(Duration_Text);
-		Duration_Text.setText(trip.getDuration() + " mín");
+		
+		if(trip.getDuration() == -1) {
+			Duration_Text.setText("margar mín");
+		}else {
+			Duration_Text.setText(trip.getDuration() + " mín");
+		}
 		
 		JLabel PhotoLabel = new JLabel("");
 		PhotoLabel.setBounds(10, 11, 130, 92);
