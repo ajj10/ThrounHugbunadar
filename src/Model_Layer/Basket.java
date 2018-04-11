@@ -7,10 +7,10 @@ public class Basket {
 	private ArrayList<Daytrip> trips;
 	private Customer customerInfo;
 	
-	public Basket(ArrayList<Daytrip> Trips, Customer customer) 
+	public Basket() 
 	{
-		trips = Trips;
-		customerInfo = customer;
+		trips = new ArrayList<Daytrip>();
+		//customerInfo = new Customer;
 	}
 
 	public ArrayList<Daytrip> getTrips() {
@@ -22,6 +22,7 @@ public class Basket {
 	}
 	
 	public void addTrip(Daytrip trip) {
+		System.out.println("add to basket: " + trip.getName());
 		trips.add(trip);
 	}
 	

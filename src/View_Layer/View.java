@@ -56,12 +56,15 @@ public class View {
 	private JSlider priceSlider;
 	
 	private View_Trip view_trip;
+	private View_Basket view_basket;
 	
 	public String searchString;
 	public String Location = "Reykjavík";
 	public String Activity = "";
 	public int Price;
 	public int index;
+	
+	private View view;
 	
 	
 	
@@ -97,12 +100,13 @@ public class View {
 		
 		trips = new ArrayList<Daytrip>();
 		tripsearch = new TripSearch(trips, "", "", 0, 10000000, -1, -1);
+		basket = new Basket();
 		root = new Root(basket, tripsearch);
-		
+		view = this;
 		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.menu);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -140,11 +144,11 @@ public class View {
 		
 		//Search Button
 		//------------------------------------------------
-		searchButton.setBounds(341, 11, 83, 23);
+		searchButton.setBounds(536, 66, 100, 33);
 		frame.getContentPane().add(searchButton);
 		
 		searchBoxTextField = new JTextField();
-		searchBoxTextField.setBounds(22, 12, 299, 20);
+		searchBoxTextField.setBounds(64, 65, 443, 33);
 		frame.getContentPane().add(searchBoxTextField);
 		searchBoxTextField.setColumns(10);
 		
@@ -160,7 +164,7 @@ public class View {
 		comboBoxLocation.addItem("Vatnajökull");
 
 		comboBoxLocation.setToolTipText("");
-		comboBoxLocation.setBounds(341, 58, 83, 22);
+		comboBoxLocation.setBounds(648, 109, 147, 22);
 		frame.getContentPane().add(comboBoxLocation);
 		
 		comboBoxLocation.addActionListener(new ActionListener() {
@@ -176,7 +180,7 @@ public class View {
 		//Scrollpane
 		//------------------------------------------------------
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 42, 299, 167);
+		scrollPane.setBounds(64, 110, 572, 297);
 		frame.getContentPane().add(scrollPane);
 		
 		scrollPane.setViewportView(tripDisplayList);
@@ -192,7 +196,7 @@ public class View {
 		comboBoxActivity.addItem("Nature and parks");
 		comboBoxActivity.addItem("Outdoor activities");
 		
-		comboBoxActivity.setBounds(341, 90, 83, 23);
+		comboBoxActivity.setBounds(648, 143, 147, 23);
 		frame.getContentPane().add(comboBoxActivity);
 		
 		comboBoxActivity.addActionListener(new ActionListener() {
@@ -218,16 +222,27 @@ public class View {
 			}
 		});
 		
-		priceSlider.setBounds(248, 220, 147, 26);
+		priceSlider.setBounds(648, 178, 147, 26);
 		frame.getContentPane().add(priceSlider);
 		
 		JLabel lblKr = new JLabel("0 kr.");
-		lblKr.setBounds(248, 245, 44, 14);
+		lblKr.setBounds(646, 216, 44, 14);
 		frame.getContentPane().add(lblKr);
 		
 		JLabel lblKr_1 = new JLabel("50.000 kr.");
-		lblKr_1.setBounds(361, 245, 63, 14);
+		lblKr_1.setBounds(759, 216, 63, 14);
 		frame.getContentPane().add(lblKr_1);
+		
+		JButton btnBasket = new JButton("Basket");
+		btnBasket.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				view_basket = new View_Basket(root.getBasket());
+				view_basket.setVisible(true);
+			}
+		});
+		btnBasket.setBounds(661, 297, 117, 29);
+		frame.getContentPane().add(btnBasket);
 		
 		
 		
@@ -240,7 +255,7 @@ public class View {
 			public void mouseClicked(MouseEvent arg0) {
 				int rowIndex = tripDisplayList.getSelectedRow();
 				System.out.println(trips.get(rowIndex).getName());
-				view_trip = new View_Trip(trips.get(rowIndex));
+				view_trip = new View_Trip(view, trips.get(rowIndex));
 				view_trip.setVisible(true);
 			}
 
