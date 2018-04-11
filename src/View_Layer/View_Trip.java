@@ -284,4 +284,3 @@ public class View_Trip extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 }
-
