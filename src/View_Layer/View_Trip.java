@@ -31,6 +31,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DropMode;
 
+import java.time.Year;
+import java.time.MonthDay;
+
 public class View_Trip extends JFrame {
 
 	// breyting
@@ -44,6 +47,9 @@ public class View_Trip extends JFrame {
 	private Daytrip trip;
 	private JTextField numberOfSeats;
 	private JTextField tripDate;
+	
+	public Calendar cal = null;
+	// private 
 	
 	public String day;
 	public int seats;
@@ -63,7 +69,14 @@ public class View_Trip extends JFrame {
 			}
 		});
 	}*/
-
+	
+	
+	// function that takes in a string and returns true if it is numeric, returns false if not
+	public static boolean isNumeric(String inputData) {
+		  return inputData.matches("[-+]?\\d+(\\.\\d+)?");
+		}
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -186,7 +199,7 @@ public class View_Trip extends JFrame {
 		btnNewButton.setBounds(616, 354, 122, 23);
 		contentPane.add(btnNewButton);
 		
-		JLabel lblDateddmmyy = new JLabel("Date (DD/MM/YY)");
+		JLabel lblDateddmmyy = new JLabel("Date (DDMMYY)");
 		lblDateddmmyy.setBounds(516, 283, 130, 14);
 		contentPane.add(lblDateddmmyy);
 		
@@ -199,9 +212,34 @@ public class View_Trip extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Check availability");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				day = tripDate.getText();
+		public void actionPerformed(ActionEvent arg0) {
+		day = tripDate.getText();
+			
+		// if that returns true if the day is numeric
+		if (isNumeric(day)) {
+			int yearBooking = Integer.parseInt(day.substring(4,6));
+			int monthBooking = Integer.parseInt(day.substring(2,4));
+			int dayBooking = Integer.parseInt(day.substring(0,2));
+			
+			String bla =  "" + Year.now().getValue();
+			int yearNow = Integer.parseInt(bla.substring(2,4));
+			
+			int monthNow = MonthDay.now().getMonthValue();
+			int dayNow = MonthDay.now().getDayOfMonth();
+			
+			// if else sayings to check if the date is up to date
+		if (yearBooking > yearNow) {
+				seats = trip.getSeatsAvailable(day);
+				JOptionPane.showMessageDialog(contentPane,
+			            "Available seats for "
+			             + day + " are:  " + seats,
+			             "Seats",
+			            JOptionPane.INFORMATION_MESSAGE,
+			            null);
+		}
+			
+		else {
+			if ((yearBooking == yearNow)&&(monthBooking > monthNow)) {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
@@ -210,8 +248,40 @@ public class View_Trip extends JFrame {
 			            JOptionPane.INFORMATION_MESSAGE,
 			            null);
 			}
-		});
+			else {
+				if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)) {
+					seats = trip.getSeatsAvailable(day);
+					JOptionPane.showMessageDialog(contentPane,
+			            	"Available seats for "
+			             	+ day + " are:  " + seats,
+			             	"Seats",
+			            	JOptionPane.INFORMATION_MESSAGE,
+			            	null);
+				}
+			else {
+					JOptionPane.showMessageDialog(contentPane,
+			            	"This date is not up to date",
+			             	"Error",
+			            	JOptionPane.INFORMATION_MESSAGE,
+			            	null);
+			}
+			}
+		}
+		}
+
+		// if the date is not numeric
+		else {
+			JOptionPane.showMessageDialog(contentPane,
+			"<html>This input is not on the correct format<br/> Please write the input with 6 numeric digits <br/><br/> For example: 123456",
+			"Error",
+			            	JOptionPane.INFORMATION_MESSAGE,
+			            	null);
+		}
+			}});
+		
+		
 		btnNewButton_1.setBounds(616, 304, 122, 23);
 		contentPane.add(btnNewButton_1);
 	}
 }
+
