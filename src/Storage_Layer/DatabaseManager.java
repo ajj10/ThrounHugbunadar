@@ -46,16 +46,18 @@ public class DatabaseManager
 	  if(rs.getString(7) != null) tripDuration = Integer.parseInt(rs.getString(7));
 	  String tripDescription = rs.getString(8);
 	  
-	  Statement statement = connection.createStatement();
-	  String query = "SELECT * FROM Bookings WHERE tripNumber = " + tripNumber + ";";
-	  ResultSet seats = statement.executeQuery(query);
+	  Statement statement1 = connection.createStatement();
+	  String query1 = "SELECT * FROM Bookings WHERE tripNumber = " + tripNumber + ";";
+	  ResultSet seats = statement1.executeQuery(query1);
 	  int tripSeatsAvailable = 7; //fast
-	  if(rs.getString(3) != null) tripSeatsAvailable = Integer.parseInt(rs.getString(3));
+	  while(seats.next()) {
+		  if(seats.getString(3) != null) tripSeatsAvailable = Integer.parseInt(seats.getString(3));
+	  }
 	  
 	  //Reviews
-	  Statement statement1 = connection.createStatement();
-	  String query1 = "SELECT * FROM Review WHERE tripNumber = " + tripNumber + ";";
-	  ResultSet reviews = statement1.executeQuery(query1);
+	  Statement statement2 = connection.createStatement();
+	  String query2 = "SELECT * FROM Review WHERE tripNumber = " + tripNumber + ";";
+	  ResultSet reviews = statement2.executeQuery(query2);
 	  ArrayList<Review> reviewsArray = new ArrayList<Review>();
 	  while(reviews.next()) {
 		  //vantar reviewTitle og Date í database
