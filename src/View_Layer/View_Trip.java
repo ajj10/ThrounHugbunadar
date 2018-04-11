@@ -216,7 +216,7 @@ public class View_Trip extends JFrame {
 		day = tripDate.getText();
 			
 		// if that returns true if the day is numeric
-		if (isNumeric(day)) {
+		if (isNumeric(day) && day.length() == 6) {
 			int yearBooking = Integer.parseInt(day.substring(4,6));
 			int monthBooking = Integer.parseInt(day.substring(2,4));
 			int dayBooking = Integer.parseInt(day.substring(0,2));
@@ -232,28 +232,28 @@ public class View_Trip extends JFrame {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
-			             + day + " are: " + seats,
+			             + day.substring(0, 2) + "/" + day.substring(2, 4) + "/20" + day.substring(4, 6)+ " are: " + seats,
 			             "Seats",
 			            JOptionPane.INFORMATION_MESSAGE,
 			            null);
 		}
 			
 		else {
-			if ((yearBooking == yearNow)&&(monthBooking > monthNow)) {
+			if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(monthBooking <= 12)) {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
-			             + day + " are: " + seats,
+			             + day.substring(0, 2) + "/" + day.substring(2, 4) + "/20" + day.substring(4, 6) + " are: " + seats,
 			             "Seats",
 			            JOptionPane.INFORMATION_MESSAGE,
 			            null);
 			}
 			else {
-				if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)) {
+				if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)&&(dayBooking >= 31 )) {
 					seats = trip.getSeatsAvailable(day);
 					JOptionPane.showMessageDialog(contentPane,
 			            	"Available seats for "
-			             	+ day + " are: " + seats,
+			             	+ day.substring(0, 2) + "/" + day.substring(2, 4) + "/20" + day.substring(4, 6) + " are: " + seats,
 			             	"Seats",
 			            	JOptionPane.INFORMATION_MESSAGE,
 			            	null);
@@ -272,7 +272,7 @@ public class View_Trip extends JFrame {
 		// if the date is not numeric
 		else {
 			JOptionPane.showMessageDialog(contentPane,
-			"<html>This input is not on the correct format<br/> Please write the input with 6 numeric digits <br/><br/> For example: 123456",
+			"<html>This input is not on the correct format<br/> Please write the input with 6 numeric digits <br/><br/> For example: 010118",
 			"Error",
 			            	JOptionPane.INFORMATION_MESSAGE,
 			            	null);
