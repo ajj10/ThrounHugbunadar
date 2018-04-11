@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -66,19 +67,19 @@ public class View_Trip extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public View_Trip(Daytrip myTrip) {
+	public View_Trip(View parent, Daytrip myTrip) {
 		trip = myTrip;
 		
 		setTitle(trip.getName());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(148, 11, 262, 92);
+		scrollPane.setBounds(486, 33, 296, 226);
 		contentPane.add(scrollPane);
 		
 		JTextArea descriptionText = new JTextArea();
@@ -92,28 +93,28 @@ public class View_Trip extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Activity:");
-		lblNewLabel.setBounds(10, 131, 62, 14);
+		lblNewLabel.setBounds(42, 288, 62, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Location:");
-		lblNewLabel_1.setBounds(10, 156, 62, 14);
+		lblNewLabel_1.setBounds(42, 313, 62, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Price:");
-		lblNewLabel_2.setBounds(10, 181, 54, 14);
+		lblNewLabel_2.setBounds(42, 338, 54, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Rating:");
-		lblNewLabel_3.setBounds(10, 206, 54, 14);
+		lblNewLabel_3.setBounds(42, 363, 54, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Duration:");
-		lblNewLabel_4.setBounds(10, 231, 62, 14);
+		lblNewLabel_4.setBounds(42, 388, 62, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		Activity_Text = new JTextField();
 		Activity_Text.setEditable(false);
-		Activity_Text.setBounds(84, 125, 130, 26);
+		Activity_Text.setBounds(116, 282, 130, 26);
 		contentPane.add(Activity_Text);
 		Activity_Text.setColumns(10);
 		Activity_Text.setText(trip.getActivity());
@@ -121,28 +122,28 @@ public class View_Trip extends JFrame {
 		Location_Text = new JTextField();
 		Location_Text.setEditable(false);
 		Location_Text.setColumns(10);
-		Location_Text.setBounds(84, 150, 130, 26);
+		Location_Text.setBounds(116, 307, 130, 26);
 		contentPane.add(Location_Text);
 		Location_Text.setText(trip.getLocation());
 		
 		Price_Text = new JTextField();
 		Price_Text.setEditable(false);
 		Price_Text.setColumns(10);
-		Price_Text.setBounds(84, 175, 130, 26);
+		Price_Text.setBounds(116, 332, 130, 26);
 		contentPane.add(Price_Text);
 		Price_Text.setText(trip.getPrice() + " kr.");
 		
 		Rating_Text = new JTextField();
 		Rating_Text.setEditable(false);
 		Rating_Text.setColumns(10);
-		Rating_Text.setBounds(84, 200, 130, 26);
+		Rating_Text.setBounds(116, 357, 130, 26);
 		contentPane.add(Rating_Text);
 		Rating_Text.setText(trip.getAverageRating() + "");
 		
 		Duration_Text = new JTextField();
 		Duration_Text.setEditable(false);
 		Duration_Text.setColumns(10);
-		Duration_Text.setBounds(84, 225, 130, 26);
+		Duration_Text.setBounds(116, 382, 130, 26);
 		contentPane.add(Duration_Text);
 		
 		if(trip.getDuration() == -1) {
@@ -152,7 +153,7 @@ public class View_Trip extends JFrame {
 		}
 		
 		JLabel PhotoLabel = new JLabel("");
-		PhotoLabel.setBounds(10, 11, 130, 92);
+		PhotoLabel.setBounds(22, 33, 435, 226);
 		contentPane.add(PhotoLabel);
 	
 		String path = "Images/" + trip.getName() + ".PNG";
@@ -163,11 +164,11 @@ public class View_Trip extends JFrame {
 		PhotoLabel.setIcon(image);
 		
 		JLabel lblNewLabel_5 = new JLabel("How many persons?");
-		lblNewLabel_5.setBounds(224, 178, 122, 20);
+		lblNewLabel_5.setBounds(516, 330, 158, 20);
 		contentPane.add(lblNewLabel_5);
 		
 		numberOfSeats = new JTextField();
-		numberOfSeats.setBounds(356, 178, 54, 20);
+		numberOfSeats.setBounds(684, 330, 54, 20);
 		contentPane.add(numberOfSeats);
 		numberOfSeats.setColumns(10);
 		
@@ -178,18 +179,19 @@ public class View_Trip extends JFrame {
 				day = tripDate.getText();
 				seats = trip.getSeatsAvailable(day);
 				//addToBasket(trip, day, seats);
+				parent.addToBasket(trip, day, seats);
 				
 			}
 		});
-		btnNewButton.setBounds(288, 202, 122, 23);
+		btnNewButton.setBounds(616, 354, 122, 23);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblDateddmmyy = new JLabel("Date (DD/MM/YY)");
-		lblDateddmmyy.setBounds(224, 131, 94, 14);
+		lblDateddmmyy.setBounds(516, 283, 130, 14);
 		contentPane.add(lblDateddmmyy);
 		
 		tripDate = new JTextField();
-		tripDate.setBounds(324, 128, 86, 20);
+		tripDate.setBounds(652, 280, 86, 20);
 		contentPane.add(tripDate);
 		tripDate.setColumns(10);
 		
@@ -209,7 +211,7 @@ public class View_Trip extends JFrame {
 			            null);
 			}
 		});
-		btnNewButton_1.setBounds(288, 152, 122, 23);
+		btnNewButton_1.setBounds(616, 304, 122, 23);
 		contentPane.add(btnNewButton_1);
 	}
 }

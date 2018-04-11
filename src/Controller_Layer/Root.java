@@ -54,5 +54,9 @@ public class Root {
 		myTripSearch.sortByDuration();
 		return myTripSearch.getTrips();
 	}
+	
+	public Basket getBasket() {
+		return myBasket;
+	}
 
 }
