@@ -232,7 +232,7 @@ public class View_Trip extends JFrame {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
-			             + day + " are:  " + seats,
+			             + day + " are: " + seats,
 			             "Seats",
 			            JOptionPane.INFORMATION_MESSAGE,
 			            null);
@@ -243,7 +243,7 @@ public class View_Trip extends JFrame {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
-			             + day + " are:  " + seats,
+			             + day + " are: " + seats,
 			             "Seats",
 			            JOptionPane.INFORMATION_MESSAGE,
 			            null);
@@ -253,7 +253,7 @@ public class View_Trip extends JFrame {
 					seats = trip.getSeatsAvailable(day);
 					JOptionPane.showMessageDialog(contentPane,
 			            	"Available seats for "
-			             	+ day + " are:  " + seats,
+			             	+ day + " are: " + seats,
 			             	"Seats",
 			            	JOptionPane.INFORMATION_MESSAGE,
 			            	null);
