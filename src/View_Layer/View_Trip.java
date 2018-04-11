@@ -26,6 +26,7 @@ import java.awt.Label;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DropMode;
 
 public class View_Trip extends JFrame {
 
@@ -78,11 +79,14 @@ public class View_Trip extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JTextArea descriptionText = new JTextArea();
+		descriptionText.setLineWrap(true);
 		scrollPane.setViewportView(descriptionText);
 		descriptionText.setWrapStyleWord(true);
-		descriptionText.setLineWrap(true);
 		descriptionText.setEditable(false);
 		descriptionText.setText(trip.getDescription());
+		descriptionText.setSelectionStart(0);
+		descriptionText.setSelectionEnd(0);
+		
 		
 		JLabel lblNewLabel = new JLabel("Activity:");
 		lblNewLabel.setBounds(10, 131, 62, 14);
@@ -139,9 +143,9 @@ public class View_Trip extends JFrame {
 		contentPane.add(Duration_Text);
 		
 		if(trip.getDuration() == -1) {
-			Duration_Text.setText("margar mín");
+			Duration_Text.setText("margar mï¿½n");
 		}else {
-			Duration_Text.setText(trip.getDuration() + " mín");
+			Duration_Text.setText(trip.getDuration() + " mï¿½n");
 		}
 		
 		JLabel PhotoLabel = new JLabel("");
