@@ -50,7 +50,7 @@ public class View_Basket extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		table = new JTable(new DefaultTableModel(new Object[]{"Trip", "Price", "Duration", "Rating"},0){
+		table = new JTable(new DefaultTableModel(new Object[]{"Trip", "Persons", "Price"},0){
 
 		    @Override
 		    public boolean isCellEditable(int row, int column) {

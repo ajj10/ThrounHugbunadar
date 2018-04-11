@@ -160,8 +160,12 @@ public class View {
 		comboBoxLocation.addItem("Akureyri");
 		comboBoxLocation.addItem("Heimaey");
 		comboBoxLocation.addItem("Ísafjörður");
+		comboBoxLocation.addItem("Keflavík");
+		comboBoxLocation.addItem("London");
+		comboBoxLocation.addItem("Paris");
 		comboBoxLocation.addItem("Reykjavík");
 		comboBoxLocation.addItem("Vatnajökull");
+		
 
 		comboBoxLocation.setToolTipText("");
 		comboBoxLocation.setBounds(648, 109, 147, 22);
@@ -192,6 +196,7 @@ public class View {
 		comboBoxActivity = new JComboBox();
 		comboBoxActivity.addItem("Activity:");
 		comboBoxActivity.addItem("Boat tours");
+		comboBoxActivity.addItem("Games");
 		comboBoxActivity.addItem("Museums");
 		comboBoxActivity.addItem("Nature and parks");
 		comboBoxActivity.addItem("Outdoor activities");
