@@ -166,6 +166,7 @@ public class View {
 		comboBoxLocation.addItem("Paris");
 		comboBoxLocation.addItem("Reykjavík");
 		comboBoxLocation.addItem("Vatnajökull");
+		comboBoxLocation.setSelectedIndex(7);
 		
 
 		comboBoxLocation.setToolTipText("");
@@ -201,6 +202,7 @@ public class View {
 		comboBoxActivity.addItem("Museums");
 		comboBoxActivity.addItem("Nature and parks");
 		comboBoxActivity.addItem("Outdoor activities");
+		comboBoxActivity.setSelectedIndex(0);
 		
 		comboBoxActivity.setBounds(648, 143, 147, 23);
 		frame.getContentPane().add(comboBoxActivity);
@@ -220,6 +222,7 @@ public class View {
 		priceSlider.setMinimum(0);
 		priceSlider.setMaximum(50000);
 		priceSlider.setValue(50000);
+		updateTrips();
 		
 		priceSlider.addMouseListener(new MouseAdapter() {
 			@Override
