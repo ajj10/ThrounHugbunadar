@@ -62,6 +62,7 @@ public class Root {
 
 	public void bookBasket() {
 		DatabaseManager.book(myBasket);
+		myBasket.emptyBasket();
 		
 	}
 
