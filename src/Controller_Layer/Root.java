@@ -22,7 +22,7 @@ public class Root {
 		//review
 	}
 	
-	public void bookSeat(Daytrip trip, String day, int numSeats) {
+	public void addBooking(Daytrip trip, String day, int numSeats) {
 		myBasket.addBooking(trip, numSeats, day);
 	}
 	
