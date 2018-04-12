@@ -332,4 +332,9 @@ public class View {
 		view_checkout = new View_Checkout(root.getBasket(), this);
 		view_checkout.setVisible(true);
 	}
+
+	public void bookBasket() {
+		root.bookBasket();
+		
+	}
 }

@@ -1,6 +1,8 @@
 package Storage_Layer;
 
 import java.sql.*;
+
+import Model_Layer.Basket;
 import Model_Layer.Daytrip;
 import Model_Layer.Review;
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class DatabaseManager
 		  reviewsArray.add(new Review(reviews.getString(2), "reviewTitle", new Date(), reviews.getString(3), Integer.parseInt(reviews.getString(3))));
 	  }
 	  
-	  Daytrip trips = new Daytrip(tripName, tripLocation, tripDuration, tripAverageRating, tripPrice, tripActivity, tripSeatsAvailable, tripDescription, reviewsArray);
+	  Daytrip trips = new Daytrip(tripNumber, tripName, tripLocation, tripDuration, tripAverageRating, tripPrice, tripActivity, tripSeatsAvailable, tripDescription, reviewsArray);
       return trips;
   }
   
@@ -117,4 +119,15 @@ public class DatabaseManager
       }
     }
   }
+
+public static void book(Basket myBasket) {
+	for(int i = 0; i < myBasket.getBookings().size(); i++) {
+		int tripNumber = myBasket.getBookings().get(i).getTrip().getID();
+		int bookingID = myBasket.getCustomerInfo().getBookingID();
+		int seatsTaken = myBasket.getBookings().get(i).getSeats();
+		String date = myBasket.getBookings().get(i).getDay();
+		//INSERT INTO...
+		System.out.println(tripNumber);
+	}
+}
 }

@@ -12,6 +12,8 @@ import Model_Layer.Basket;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class View_Checkout extends JFrame {
 
@@ -109,6 +111,19 @@ public class View_Checkout extends JFrame {
 		totaltextField.setText(myBasket.getTotal() + " kr.");
 		
 		btnBook = new JButton("Book");
+		btnBook.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myBasket.getCustomerInfo().setFullName(NametextField.getText());
+				myBasket.getCustomerInfo().setEmail(EmailtextField.getText());
+				myBasket.getCustomerInfo().setCreditCard(CredittextField.getText());
+				if(myBasket.getCustomerInfo().isValid()) {
+					parentView.bookBasket();
+					dispose();
+				}
+				
+			}
+		});
 		btnBook.setBounds(426, 304, 117, 29);
 		contentPane.add(btnBook);
 	}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import Model_Layer.Basket;
 import Model_Layer.Daytrip;
 import Model_Layer.Review;
+import Storage_Layer.DatabaseManager;
 
 public class Root {
 	
@@ -57,6 +58,11 @@ public class Root {
 	
 	public Basket getBasket() {
 		return myBasket;
+	}
+
+	public void bookBasket() {
+		DatabaseManager.book(myBasket);
+		
 	}
 
 }

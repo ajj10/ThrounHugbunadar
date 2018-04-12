@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Daytrip {
 	
+	private int ID;
 	private String name;
 	private String location;
 	private int duration;
@@ -16,9 +17,10 @@ public class Daytrip {
 	private String description;
 	private ArrayList<Review> reviews;
 	
-	public Daytrip(String tripName, String tripLocation, int tripDuration, int tripAverageRating, 
+	public Daytrip(int id, String tripName, String tripLocation, int tripDuration, int tripAverageRating, 
 					int tripPrice, String tripActivity, int tripSeatsAvailable, String tripDescription, ArrayList<Review> tripReviews)
 	{
+		ID = id;
 		name = tripName;
 		location = tripLocation;
 		duration = tripDuration;
@@ -77,6 +79,10 @@ public class Daytrip {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public int getID() {
+		return ID;
 	}
 
 }
