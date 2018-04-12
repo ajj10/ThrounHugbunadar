@@ -324,9 +324,12 @@ public class View {
 	}
 	
 	
+	
+	//bætir við ferð í basket
 	public void addToBasket(Daytrip trip, String day, int seats) {
 		root.addBooking(trip, day, seats);
 	}
+	
 	
 	public void checkout() {
 		view_checkout = new View_Checkout(root.getBasket(), this);

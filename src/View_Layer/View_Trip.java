@@ -91,6 +91,9 @@ public class View_Trip extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		//scrollpane fyrir töflu og tafla fyrir description ferðar
+		//---------------------------------------------------------
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(486, 33, 296, 226);
 		contentPane.add(scrollPane);
@@ -105,6 +108,9 @@ public class View_Trip extends JFrame {
 		descriptionText.setSelectionEnd(0);
 		
 		
+		
+		//labels
+		//----------------------------------------------------
 		JLabel lblNewLabel = new JLabel("Activity:");
 		lblNewLabel.setBounds(42, 288, 62, 14);
 		contentPane.add(lblNewLabel);
@@ -125,6 +131,9 @@ public class View_Trip extends JFrame {
 		lblNewLabel_4.setBounds(42, 388, 62, 14);
 		contentPane.add(lblNewLabel_4);
 		
+		
+		//nær í activity ferðar og setur í viðeigandi textfield
+		//-----------------------------------------------------
 		Activity_Text = new JTextField();
 		Activity_Text.setEditable(false);
 		Activity_Text.setBounds(116, 282, 130, 26);
@@ -132,6 +141,8 @@ public class View_Trip extends JFrame {
 		Activity_Text.setColumns(10);
 		Activity_Text.setText(trip.getActivity());
 		
+		//nær í location ferðar og setur í viðeigandi textfield
+		//-----------------------------------------------------
 		Location_Text = new JTextField();
 		Location_Text.setEditable(false);
 		Location_Text.setColumns(10);
@@ -139,6 +150,9 @@ public class View_Trip extends JFrame {
 		contentPane.add(Location_Text);
 		Location_Text.setText(trip.getLocation());
 		
+		
+		//nær í verð ferðar og setur í viðeigandi textfield
+		//-----------------------------------------------------
 		Price_Text = new JTextField();
 		Price_Text.setEditable(false);
 		Price_Text.setColumns(10);
@@ -146,6 +160,9 @@ public class View_Trip extends JFrame {
 		contentPane.add(Price_Text);
 		Price_Text.setText(trip.getPrice() + " kr.");
 		
+		
+		//nær í rating ferðar og setur í viðeigandi textfield
+		//-----------------------------------------------------
 		Rating_Text = new JTextField();
 		Rating_Text.setEditable(false);
 		Rating_Text.setColumns(10);
@@ -153,22 +170,26 @@ public class View_Trip extends JFrame {
 		contentPane.add(Rating_Text);
 		Rating_Text.setText(trip.getAverageRating() + "");
 		
+		
+		//Nær í duration ferðar og setur í viðeigandi textfield
+		//--------------------------------------------------------
 		Duration_Text = new JTextField();
 		Duration_Text.setEditable(false);
 		Duration_Text.setColumns(10);
 		Duration_Text.setBounds(116, 382, 130, 26);
 		contentPane.add(Duration_Text);
-		
 		if(trip.getDuration() == -1) {
-			Duration_Text.setText("margar mï¿½n");
+			Duration_Text.setText("margar min");
 		}else {
-			Duration_Text.setText(trip.getDuration() + " mï¿½n");
+			Duration_Text.setText(trip.getDuration() + " min");
 		}
 		
+
+		//tekur myndir, gerir þær að réttri stærð og setur sem icon fyrir label
+		//----------------------------------------------------------
 		JLabel PhotoLabel = new JLabel("");
 		PhotoLabel.setBounds(22, 33, 435, 226);
 		contentPane.add(PhotoLabel);
-	
 		String path = "Images/" + trip.getName() + ".PNG";
 		ImageIcon myImage = new ImageIcon(path);
 		Image img = myImage.getImage();
@@ -176,46 +197,75 @@ public class View_Trip extends JFrame {
 		ImageIcon image = new ImageIcon(newImg);
 		PhotoLabel.setIcon(image);
 		
+		
+		
+		//label og textagluggi fyrir fjölda sæta pantað, tekið inn frá viðmóti
+		//----------------------------------------------------------------------
 		JLabel lblNewLabel_5 = new JLabel("How many persons?");
 		lblNewLabel_5.setBounds(516, 330, 158, 20);
 		contentPane.add(lblNewLabel_5);
-		
 		numberOfSeats = new JTextField();
 		numberOfSeats.setBounds(684, 330, 54, 20);
 		contentPane.add(numberOfSeats);
 		numberOfSeats.setColumns(10);
+		numberOfSeats.setText("0");
 		
+		
+		
+		//Listener fyrir add to basket takkan
+		//---------------------------------------------------------
 		JButton btnNewButton = new JButton("Add to Basket");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				day = tripDate.getText();
-				seats = Integer.parseInt(numberOfSeats.getText());
-				//addToBasket(trip, day, seats);
-				parent.addToBasket(trip, day, seats);
-				dispose();
+				if(numberOfSeats.getText() != null) {
+					seats = Integer.parseInt(numberOfSeats.getText());
+				}else {
+					seats = 0;
+				}
 				
-			}
-		});
+				boolean boo = validSeatDay(seats, false);
+				if(boo == true) {
+					parent.addToBasket(trip, day, seats);
+					dispose();
+				}
+		}});
 		btnNewButton.setBounds(616, 354, 122, 23);
 		contentPane.add(btnNewButton);
 		
+		
+		
+		//dags. label og gluggi sem tekur inn dags. frá viðmóti
+		//----------------------------------------------------------
 		JLabel lblDateddmmyy = new JLabel("Date (DDMMYY)");
 		lblDateddmmyy.setBounds(516, 283, 130, 14);
 		contentPane.add(lblDateddmmyy);
-		
 		tripDate = new JTextField();
 		tripDate.setBounds(652, 280, 86, 20);
 		contentPane.add(tripDate);
 		tripDate.setColumns(10);
 		
 		
-		
+		//Listener fyrir availability takkann
+		//---------------------------------------------------------
 		JButton btnNewButton_1 = new JButton("Check availability");
 		btnNewButton_1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
+				validDay();
+			}});
+		
+		btnNewButton_1.setBounds(616, 304, 122, 23);
+		contentPane.add(btnNewButton_1);
+	}
+	
+	
+	//Fall sem kannar hvort allt sé í lagi þegar ýtt er á add to bakset takkann
+	//og ef ekki skilar út viðeigandi skilaboði
+	//----------------------------------------------------------------------------------
+	public boolean validSeatDay(int seats, boolean book) {
 		day = tripDate.getText();
-			
+		
 		// if that returns true if the day is numeric
 		if (isNumeric(day) && day.length() == 6) {
 			int yearBooking = Integer.parseInt(day.substring(4,6));
@@ -229,7 +279,73 @@ public class View_Trip extends JFrame {
 			int dayNow = MonthDay.now().getDayOfMonth();
 			
 			// if else sayings to check if the date is up to date
-		if (yearBooking > yearNow) {
+			if ((yearBooking > yearNow)&&(monthBooking<=12)&&(dayBooking<=31)&&(seats > 0)&&(seats <= trip.getSeatsAvailable(day))) {
+					return true;
+			}else if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(monthBooking <= 12)&&(dayBooking<=31)&&(seats > 0)&&(seats <= trip.getSeatsAvailable(day))) {
+					return true;
+				}else if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)&&(dayBooking <= 31 )&&(seats > 0)&&(seats <= trip.getSeatsAvailable(day))) {
+						return true;
+					}
+				else { if(seats == 0) {
+						JOptionPane.showMessageDialog(contentPane,
+				            	"Please choose how many seats you would like",
+				             	"Error",
+				            	JOptionPane.INFORMATION_MESSAGE,
+				            	null);
+						return false;
+				}else if(seats> trip.getSeatsAvailable(day)){
+					JOptionPane.showMessageDialog(contentPane,
+			            	"Not enough seats available on chosen day",
+			             	"Error",
+			            	JOptionPane.INFORMATION_MESSAGE,
+			            	null);
+					return false;
+				}else {
+					JOptionPane.showMessageDialog(contentPane,
+			            	"This date is not up to date",
+			             	"Error",
+			            	JOptionPane.INFORMATION_MESSAGE,
+			            	null);
+					return false;
+				}
+				}
+				}
+			
+			// if the date is not numeric
+			else {
+				JOptionPane.showMessageDialog(contentPane,
+				"<html>This input is not on the correct format<br/> Please write a date with 6 numeric digits <br/><br/> For example: 010118",
+				"Error",
+				            	JOptionPane.INFORMATION_MESSAGE,
+				            	null);
+				return false;
+			}
+			
+			
+		}
+	
+	
+	
+	//Fall sem kannar hvort allt sé í lagi þegar ýtt er á availability takkan
+	//og ef ekki skilar út viðeigandi skilaboði
+	//------------------------------------------------------------------------
+	public void validDay() {
+		day = tripDate.getText();
+		
+		// if that returns true if the day is numeric
+		if (isNumeric(day) && day.length() == 6) {
+			int yearBooking = Integer.parseInt(day.substring(4,6));
+			int monthBooking = Integer.parseInt(day.substring(2,4));
+			int dayBooking = Integer.parseInt(day.substring(0,2));
+			
+			String bla =  "" + Year.now().getValue();
+			int yearNow = Integer.parseInt(bla.substring(2,4));
+			
+			int monthNow = MonthDay.now().getMonthValue();
+			int dayNow = MonthDay.now().getDayOfMonth();
+			
+			// if else sayings to check if the date is up to date
+		if ((yearBooking > yearNow)&&(monthBooking<=12)&&(dayBooking<=31)) {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
@@ -240,7 +356,7 @@ public class View_Trip extends JFrame {
 		}
 			
 		else {
-			if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(monthBooking <= 12)) {
+			if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(monthBooking <= 12)&&(dayBooking<=31)) {
 				seats = trip.getSeatsAvailable(day);
 				JOptionPane.showMessageDialog(contentPane,
 			            "Available seats for "
@@ -250,7 +366,7 @@ public class View_Trip extends JFrame {
 			            null);
 			}
 			else {
-				if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)&&(dayBooking >= 31 )) {
+				if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)&&(dayBooking <= 31 )) {
 					seats = trip.getSeatsAvailable(day);
 					JOptionPane.showMessageDialog(contentPane,
 			            	"Available seats for "
@@ -278,10 +394,5 @@ public class View_Trip extends JFrame {
 			            	JOptionPane.INFORMATION_MESSAGE,
 			            	null);
 		}
-			}});
-		
-		
-		btnNewButton_1.setBounds(616, 304, 122, 23);
-		contentPane.add(btnNewButton_1);
 	}
 }

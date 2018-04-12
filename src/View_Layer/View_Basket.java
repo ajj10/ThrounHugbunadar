@@ -57,10 +57,15 @@ public class View_Basket extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		//scrollpane fyrir töflu
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 81, 468, 273);
 		contentPane.add(scrollPane);
 		
+		
+		//búa til töflu og stilla hana af
+		//-------------------------------------------------------------------------------------------------
 		table = new JTable(new DefaultTableModel(new Object[]{"Trip", "Day", "Persons", "Price (total)"},0){
 
 		    @Override
@@ -71,6 +76,16 @@ public class View_Basket extends JFrame {
 		table.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
 		scrollPane.setViewportView(table);
 		
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setPreferredWidth(50);
+		table.getColumnModel().getColumn(2).setPreferredWidth(30);
+		table.getColumnModel().getColumn(3).setPreferredWidth(50);
+		table.getTableHeader().setResizingAllowed(false);
+		
+		
+		//listener fyrir checkout takkann
+		//--------------------------------------------------------
 		JButton btnCheckout = new JButton("Checkout");
 		btnCheckout.addMouseListener(new MouseAdapter() {
 			@Override
@@ -82,16 +97,14 @@ public class View_Basket extends JFrame {
 		btnCheckout.setBounds(477, 324, 117, 29);
 		contentPane.add(btnCheckout);
 		
-		
-		
 		dm = (DefaultTableModel) table.getModel();
-		
-		
-		
 		
 		addToList();
 	}
 	
+	
+	//nær í ferðir úr basket og fyllir inní töfluna(basket viewið)
+	//-------------------------------------------------------------
 	private void addToList() {
 		dm.setNumRows(0);
 		for(int i = 0; i < basket.getBookings().size(); i++) {
@@ -99,7 +112,7 @@ public class View_Basket extends JFrame {
 			int numSeats = basket.getBookings().get(i).getSeats();
 			int totalTrip = numSeats * basket.getBookings().get(i).getTrip().getPrice();
 			String day = basket.getBookings().get(i).getDay();
-			dm.addRow(new Object[]{tripName, day, numSeats, totalTrip});
+			dm.addRow(new Object[]{tripName, (day.substring(0, 2)+"/"+day.substring(2, 4)+"/"+day.substring(4, 6)), numSeats, (totalTrip+" kr.")});
 		}	
 	}
 }
