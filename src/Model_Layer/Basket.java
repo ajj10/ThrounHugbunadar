@@ -1,45 +1,50 @@
 package Model_Layer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Basket {
 	
-	private ArrayList<Daytrip> trips;
+	private ArrayList<Booking> bookings;
 	private Customer customerInfo;
 	
 	public Basket() 
 	{
-		trips = new ArrayList<Daytrip>();
-		//customerInfo = new Customer;
+		bookings = new ArrayList<Booking>();
+		customerInfo = new Customer();
 	}
 
-	public ArrayList<Daytrip> getTrips() {
-		return trips;
+	public ArrayList<Booking> getBookings() {
+		return bookings;
 	}
 	
 	public String getCustomerName() {
 		return customerInfo.getFullName();
 	}
 	
-	public void addTrip(Daytrip trip) {
-		System.out.println("add to basket: " + trip.getName());
-		trips.add(trip);
+	public Customer getCustomerInfo() {
+		return customerInfo;
 	}
 	
-	public void removeTrip(Daytrip trip) {
-		trips.remove(trip);
+	public void addBooking(Daytrip trip, int seats, String day) {
+		System.out.println("add to basket: " + trip.getName() + ", seats: " + seats + ", date: " + day);
+		bookings.add(new Booking(trip, seats, day));
+	}
+	
+	public void removeTrip(Booking booking) {
+		bookings.remove(booking);
 	}
 	
 	public void emptyBasket() {
-		customerInfo = null;
-		trips = null;
+		bookings.clear();
 	}
 	
 	public int getTotal() {
 		int totalPrice = 0;
 		
-		for (int i = 0; i < trips.size(); i++) {
-			totalPrice += trips.get(i).getPrice();
+		for (int i = 0; i < bookings.size(); i++) {
+			totalPrice += bookings.get(i).getTrip().getPrice() * bookings.get(i).getSeats();
 		}
 		
 		return totalPrice;

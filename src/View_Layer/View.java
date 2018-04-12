@@ -57,6 +57,7 @@ public class View {
 	
 	private View_Trip view_trip;
 	private View_Basket view_basket;
+	private View_Checkout view_checkout;
 	
 	public String searchString;
 	public String Location = "Reykjavík";
@@ -242,7 +243,7 @@ public class View {
 		btnBasket.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				view_basket = new View_Basket(root.getBasket());
+				view_basket = new View_Basket(root.getBasket(), view);
 				view_basket.setVisible(true);
 			}
 		});
@@ -325,5 +326,10 @@ public class View {
 	
 	public void addToBasket(Daytrip trip, String day, int seats) {
 		root.bookSeat(trip, day, seats);
+	}
+	
+	public void checkout() {
+		view_checkout = new View_Checkout(root.getBasket(), this);
+		view_checkout.setVisible(true);
 	}
 }

@@ -7,12 +7,12 @@ public class Customer {
 	private String email;
 	private String creditCard;
 	
-	public Customer(int BookingID, String FullName, String Email, String CreditCard) 
+	public Customer() 
 	{
-		bookingID = BookingID;
-		fullName = FullName;
-		email = Email;
-		creditCard = CreditCard;
+		bookingID = 123456;
+		fullName = "";
+		email = "";
+		creditCard = "";
 	}
 	
 	public void setFullName(String name) {
@@ -55,7 +55,7 @@ public class Customer {
 	
 	public boolean isValid() {
 		boolean b = true;
-		//ef allt rett юб true annars false
+		//ef allt rett пїЅпїЅ true annars false
 		return b;
 	}
 

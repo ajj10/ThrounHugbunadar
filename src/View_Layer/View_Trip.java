@@ -190,9 +190,10 @@ public class View_Trip extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				day = tripDate.getText();
-				seats = trip.getSeatsAvailable(day);
+				seats = Integer.parseInt(numberOfSeats.getText());
 				//addToBasket(trip, day, seats);
 				parent.addToBasket(trip, day, seats);
+				dispose();
 				
 			}
 		});

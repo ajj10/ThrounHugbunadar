@@ -23,7 +23,7 @@ public class Root {
 	}
 	
 	public void bookSeat(Daytrip trip, String day, int numSeats) {
-		myBasket.addTrip(trip);
+		myBasket.addBooking(trip, numSeats, day);
 	}
 	
 	public ArrayList<Daytrip> search(String searchString) {
