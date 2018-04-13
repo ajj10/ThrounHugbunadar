@@ -283,7 +283,7 @@ public class View_Trip extends JFrame {
 					return true;
 			}else if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(monthBooking <= 12)&&(dayBooking<=31)&&(seats > 0)&&(seats <= trip.getSeatsAvailable(day))) {
 					return true;
-				}else if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)&&(dayBooking <= 31 )&&(seats > 0)&&(seats <= trip.getSeatsAvailable(day))) {
+				}else if ((yearBooking == yearNow)&&(monthBooking == monthNow)&&(dayBooking > dayNow)&&(dayBooking <= 31 )&&(seats > 0)&&(seats <= trip.getSeatsAvailable(day))) {
 						return true;
 					}
 				else { if(seats == 0) {
@@ -366,7 +366,7 @@ public class View_Trip extends JFrame {
 			            null);
 			}
 			else {
-				if ((yearBooking == yearNow)&&(monthBooking > monthNow)&&(dayBooking > dayNow)&&(dayBooking <= 31 )) {
+				if ((yearBooking == yearNow)&&(monthBooking == monthNow)&&(dayBooking > dayNow)&&(dayBooking <= 31 )) {
 					seats = trip.getSeatsAvailable(day);
 					JOptionPane.showMessageDialog(contentPane,
 			            	"Available seats for "

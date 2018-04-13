@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import Model_Layer.Basket;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -120,6 +121,12 @@ public class View_Checkout extends JFrame {
 				if(myBasket.getCustomerInfo().isValid()) {
 					parentView.bookBasket();
 					dispose();
+				}else {
+					JOptionPane.showMessageDialog(contentPane,
+				            "Some or all information is incorrect",
+				             "Error",
+				            JOptionPane.INFORMATION_MESSAGE,
+				            null);
 				}
 				
 			}
