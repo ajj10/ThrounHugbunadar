@@ -47,14 +47,15 @@ public class DatabaseManager
 	  int tripDuration = -1;
 	  if(rs.getString(7) != null) tripDuration = Integer.parseInt(rs.getString(7));
 	  String tripDescription = rs.getString(8);
+	  int tripSeatsAvailable = 7; //fast
 	  
-	  Statement statement1 = connection.createStatement();
+	  /*Statement statement1 = connection.createStatement();
 	  String query1 = "SELECT * FROM Bookings WHERE tripNumber = " + tripNumber + ";";
 	  ResultSet seats = statement1.executeQuery(query1);
-	  int tripSeatsAvailable = 7; //fast
+	  
 	  while(seats.next()) {
 		  if(seats.getString(3) != null) tripSeatsAvailable = Integer.parseInt(seats.getString(3));
-	  }
+	  }*/
 	  
 	  //Reviews
 	  Statement statement2 = connection.createStatement();
@@ -121,13 +122,38 @@ public class DatabaseManager
   }
 
 public static void book(Basket myBasket) {
-	for(int i = 0; i < myBasket.getBookings().size(); i++) {
-		int tripNumber = myBasket.getBookings().get(i).getTrip().getID();
-		int bookingID = myBasket.getCustomerInfo().getBookingID();
-		int seatsTaken = myBasket.getBookings().get(i).getSeats();
-		String date = myBasket.getBookings().get(i).getDay();
-		//INSERT INTO...
-		System.out.println(tripNumber);
+	try {
+		connection = DriverManager.getConnection("jdbc:sqlite:database1.db");
+		Statement statement = connection.createStatement();
+		for(int i = 0; i < myBasket.getBookings().size(); i++) {
+			int tripNumber = myBasket.getBookings().get(i).getTrip().getID();
+			int bookingID = myBasket.getCustomerInfo().getBookingID();
+			int seatsTaken = myBasket.getBookings().get(i).getSeats();
+			String date = myBasket.getBookings().get(i).getDay();
+			//INSERT INTO...
+			String query = "INSERT INTO Bookings (tripNumber, BookingID, seatTaken, Date) ";
+			query += "VALUES (" + tripNumber + ", " + bookingID + ", " + seatsTaken + ", " + "'" + date + "');";
+			statement.executeUpdate(query);
+			System.out.println(query);
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+}
+
+public static int bookedSeats(int id, String day) {
+	int i = 0;
+	try {
+		connection = DriverManager.getConnection("jdbc:sqlite:database1.db");
+		Statement statement1 = connection.createStatement();
+		String query1 = "SELECT * FROM Bookings WHERE tripNumber = " + id + " AND Date = " + day + ";";
+		ResultSet seats = statement1.executeQuery(query1);
+		while(seats.next()) i += Integer.parseInt(seats.getString(3));
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return i;
 }
 }

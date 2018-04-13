@@ -2,6 +2,9 @@ package Model_Layer;
 
 //import java.sql.Date;
 import java.util.Date;
+
+import Storage_Layer.DatabaseManager;
+
 import java.util.ArrayList;
 
 public class Daytrip {
@@ -57,7 +60,7 @@ public class Daytrip {
 	}
 	
 	public int getSeatsAvailable(String day) {
-		return seatsAvailable;
+		return seatsAvailable - DatabaseManager.bookedSeats(ID, day);
 	}
 	
 	public String getDescription() {
