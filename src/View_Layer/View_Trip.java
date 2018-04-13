@@ -92,7 +92,7 @@ public class View_Trip extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		//scrollpane fyrir töflu og tafla fyrir description ferðar
+		//scrollpane fyrir tï¿½flu og tafla fyrir description ferï¿½ar
 		//---------------------------------------------------------
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(486, 33, 296, 226);
@@ -132,7 +132,7 @@ public class View_Trip extends JFrame {
 		contentPane.add(lblNewLabel_4);
 		
 		
-		//nær í activity ferðar og setur í viðeigandi textfield
+		//nï¿½r ï¿½ activity ferï¿½ar og setur ï¿½ viï¿½eigandi textfield
 		//-----------------------------------------------------
 		Activity_Text = new JTextField();
 		Activity_Text.setEditable(false);
@@ -141,7 +141,7 @@ public class View_Trip extends JFrame {
 		Activity_Text.setColumns(10);
 		Activity_Text.setText(trip.getActivity());
 		
-		//nær í location ferðar og setur í viðeigandi textfield
+		//nï¿½r ï¿½ location ferï¿½ar og setur ï¿½ viï¿½eigandi textfield
 		//-----------------------------------------------------
 		Location_Text = new JTextField();
 		Location_Text.setEditable(false);
@@ -151,7 +151,7 @@ public class View_Trip extends JFrame {
 		Location_Text.setText(trip.getLocation());
 		
 		
-		//nær í verð ferðar og setur í viðeigandi textfield
+		//nï¿½r ï¿½ verï¿½ ferï¿½ar og setur ï¿½ viï¿½eigandi textfield
 		//-----------------------------------------------------
 		Price_Text = new JTextField();
 		Price_Text.setEditable(false);
@@ -161,7 +161,7 @@ public class View_Trip extends JFrame {
 		Price_Text.setText(trip.getPrice() + " kr.");
 		
 		
-		//nær í rating ferðar og setur í viðeigandi textfield
+		//nï¿½r ï¿½ rating ferï¿½ar og setur ï¿½ viï¿½eigandi textfield
 		//-----------------------------------------------------
 		Rating_Text = new JTextField();
 		Rating_Text.setEditable(false);
@@ -171,7 +171,7 @@ public class View_Trip extends JFrame {
 		Rating_Text.setText(trip.getAverageRating() + "");
 		
 		
-		//Nær í duration ferðar og setur í viðeigandi textfield
+		//Nï¿½r ï¿½ duration ferï¿½ar og setur ï¿½ viï¿½eigandi textfield
 		//--------------------------------------------------------
 		Duration_Text = new JTextField();
 		Duration_Text.setEditable(false);
@@ -185,7 +185,7 @@ public class View_Trip extends JFrame {
 		}
 		
 
-		//tekur myndir, gerir þær að réttri stærð og setur sem icon fyrir label
+		//tekur myndir, gerir ï¿½ï¿½r aï¿½ rï¿½ttri stï¿½rï¿½ og setur sem icon fyrir label
 		//----------------------------------------------------------
 		JLabel PhotoLabel = new JLabel("");
 		PhotoLabel.setBounds(22, 33, 435, 226);
@@ -199,7 +199,7 @@ public class View_Trip extends JFrame {
 		
 		
 		
-		//label og textagluggi fyrir fjölda sæta pantað, tekið inn frá viðmóti
+		//label og textagluggi fyrir fjï¿½lda sï¿½ta pantaï¿½, tekiï¿½ inn frï¿½ viï¿½mï¿½ti
 		//----------------------------------------------------------------------
 		JLabel lblNewLabel_5 = new JLabel("How many persons?");
 		lblNewLabel_5.setBounds(516, 330, 158, 20);
@@ -219,7 +219,7 @@ public class View_Trip extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				day = tripDate.getText();
-				if(numberOfSeats.getText() != null) {
+				if(numberOfSeats.getText().matches("\\d+")) {
 					seats = Integer.parseInt(numberOfSeats.getText());
 				}else {
 					seats = 0;
@@ -236,7 +236,7 @@ public class View_Trip extends JFrame {
 		
 		
 		
-		//dags. label og gluggi sem tekur inn dags. frá viðmóti
+		//dags. label og gluggi sem tekur inn dags. frï¿½ viï¿½mï¿½ti
 		//----------------------------------------------------------
 		JLabel lblDateddmmyy = new JLabel("Date (DDMMYY)");
 		lblDateddmmyy.setBounds(516, 283, 130, 14);
@@ -260,8 +260,8 @@ public class View_Trip extends JFrame {
 	}
 	
 	
-	//Fall sem kannar hvort allt sé í lagi þegar ýtt er á add to bakset takkann
-	//og ef ekki skilar út viðeigandi skilaboði
+	//Fall sem kannar hvort allt sï¿½ ï¿½ lagi ï¿½egar ï¿½tt er ï¿½ add to bakset takkann
+	//og ef ekki skilar ï¿½t viï¿½eigandi skilaboï¿½i
 	//----------------------------------------------------------------------------------
 	public boolean validSeatDay(int seats, boolean book) {
 		day = tripDate.getText();
@@ -326,8 +326,8 @@ public class View_Trip extends JFrame {
 	
 	
 	
-	//Fall sem kannar hvort allt sé í lagi þegar ýtt er á availability takkan
-	//og ef ekki skilar út viðeigandi skilaboði
+	//Fall sem kannar hvort allt sï¿½ ï¿½ lagi ï¿½egar ï¿½tt er ï¿½ availability takkan
+	//og ef ekki skilar ï¿½t viï¿½eigandi skilaboï¿½i
 	//------------------------------------------------------------------------
 	public void validDay() {
 		day = tripDate.getText();
