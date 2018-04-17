@@ -121,6 +121,11 @@ public class View_Checkout extends JFrame {
 				if(myBasket.getCustomerInfo().isValid()) {
 					parentView.bookBasket();
 					dispose();
+					JOptionPane.showMessageDialog(contentPane,
+				            "Booking complete, details have been sent to your mom",
+				             "Til hammó",
+				            JOptionPane.INFORMATION_MESSAGE,
+				            null);
 				}else {
 					JOptionPane.showMessageDialog(contentPane,
 				            "Some or all information is incorrect",
