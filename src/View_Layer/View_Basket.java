@@ -16,6 +16,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class View_Basket extends JFrame {
 
@@ -96,6 +98,18 @@ public class View_Basket extends JFrame {
 		});
 		btnCheckout.setBounds(477, 324, 117, 29);
 		contentPane.add(btnCheckout);
+		
+		
+		//Listener fyrir emty basket takkan
+		//-----------------------------------------------------
+		JButton btnNewButton = new JButton("Empty Basket");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//parentView.
+			}
+		});
+		btnNewButton.setBounds(477, 87, 117, 29);
+		contentPane.add(btnNewButton);
 		
 		dm = (DefaultTableModel) table.getModel();
 		
