@@ -333,6 +333,10 @@ public class View {
 		root.addBooking(trip, day, seats);
 	}
 	
+	public void emptyBasket() {
+		root.getBasket().emptyBasket();;
+	}
+	
 	
 	public void checkout() {
 		view_checkout = new View_Checkout(root.getBasket(), this);

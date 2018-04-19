@@ -50,14 +50,6 @@ public class Basket {
 		return totalPrice;
 	}
 	
-	public void bookTrips() {
-		//b�ka
-	}
-	
-	public void cancelBooking() {
-		//cancella
-	}
-	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

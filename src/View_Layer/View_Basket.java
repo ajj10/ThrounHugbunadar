@@ -60,13 +60,13 @@ public class View_Basket extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		//scrollpane fyrir töflu
+		//scrollpane fyrir tï¿½flu
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 81, 468, 273);
 		contentPane.add(scrollPane);
 		
 		
-		//búa til töflu og stilla hana af
+		//bï¿½a til tï¿½flu og stilla hana af
 		//-------------------------------------------------------------------------------------------------
 		table = new JTable(new DefaultTableModel(new Object[]{"Trip", "Day", "Persons", "Price (total)"},0){
 
@@ -105,7 +105,8 @@ public class View_Basket extends JFrame {
 		JButton btnNewButton = new JButton("Empty Basket");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//parentView.
+				parentView.emptyBasket();
+				addToList();
 			}
 		});
 		btnNewButton.setBounds(477, 87, 117, 29);
@@ -117,7 +118,7 @@ public class View_Basket extends JFrame {
 	}
 	
 	
-	//nær í ferðir úr basket og fyllir inní töfluna(basket viewið)
+	//nï¿½r ï¿½ ferï¿½ir ï¿½r basket og fyllir innï¿½ tï¿½fluna(basket viewiï¿½)
 	//-------------------------------------------------------------
 	private void addToList() {
 		dm.setNumRows(0);
