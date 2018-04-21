@@ -190,7 +190,7 @@ public class View_Trip extends JFrame {
 		JLabel PhotoLabel = new JLabel("");
 		PhotoLabel.setBounds(22, 33, 435, 226);
 		contentPane.add(PhotoLabel);
-		String path = "Images/" + trip.getName() + ".PNG";
+		String path = "Images/" + trip.getName() + ".jpeg";
 		ImageIcon myImage = new ImageIcon(path);
 		Image img = myImage.getImage();
 		Image newImg = img.getScaledInstance(PhotoLabel.getWidth(), PhotoLabel.getHeight(), Image.SCALE_SMOOTH);
