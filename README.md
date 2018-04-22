@@ -1,3 +1,4 @@
-##haxkall
-###Höfundar: Adam, Ísak(semi), Sölvi(hann reynir) og Şór(masterinn)
-###sölli lel hola
+HÃ³pur 1D - Day Trip
+HÃ¶fundar: Adam, Ãsak, SÃ¶lvi og ÃÃ³r
+
+Til aÃ° keyra forritiÃ° er run.jar skrÃ¡in keyrÃ°
